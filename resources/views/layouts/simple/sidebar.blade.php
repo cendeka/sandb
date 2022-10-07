@@ -26,12 +26,8 @@
 							<div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/pekerjaan' ? 'down' : 'right' }}"></i></div>
 						</a>
 						<ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/pekerjaan' ? 'block;' : 'none;' }}">
-							<li><a href="{{route('pekerjaan')}}" class="{{ Route::currentRouteName()=='pekerjaan' ? 'active' : '' }}">Semua Kegiatan</a></li>
 							<li><a href="/kegiatan/1" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Sanitasi DAK</a></li>
 							<li><a href="/kegiatan/2" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Pembangunan MCK</a></li>
-							<li><a href="/kegiatan/3" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Pembangunan SPAM</a></li>
-							<li><a href="/kegiatan/4" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Rehab SPAM</a></li>
-							<li><a href="/kegiatan/5" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Air Minum DAK</a></li>
 						</ul>
 					</li>
 					<li class="sidebar-list">

@@ -26,12 +26,8 @@
 							<div class="according-menu"><i class="fa fa-angle-<?php echo e(request()->route()->getPrefix() == '/pekerjaan' ? 'down' : 'right'); ?>"></i></div>
 						</a>
 						<ul class="sidebar-submenu" style="display: <?php echo e(request()->route()->getPrefix() == '/pekerjaan' ? 'block;' : 'none;'); ?>">
-							<li><a href="<?php echo e(route('pekerjaan')); ?>" class="<?php echo e(Route::currentRouteName()=='pekerjaan' ? 'active' : ''); ?>">Semua Kegiatan</a></li>
 							<li><a href="/kegiatan/1" class="<?php echo e(request()->route()->getPrefix()=='kegiatan' ? 'active' : ''); ?>">Sanitasi DAK</a></li>
 							<li><a href="/kegiatan/2" class="<?php echo e(request()->route()->getPrefix()=='kegiatan' ? 'active' : ''); ?>">Pembangunan MCK</a></li>
-							<li><a href="/kegiatan/3" class="<?php echo e(request()->route()->getPrefix()=='kegiatan' ? 'active' : ''); ?>">Pembangunan SPAM</a></li>
-							<li><a href="/kegiatan/4" class="<?php echo e(request()->route()->getPrefix()=='kegiatan' ? 'active' : ''); ?>">Rehab SPAM</a></li>
-							<li><a href="/kegiatan/5" class="<?php echo e(request()->route()->getPrefix()=='kegiatan' ? 'active' : ''); ?>">Air Minum DAK</a></li>
 						</ul>
 					</li>
 					<li class="sidebar-list">

@@ -112,15 +112,17 @@
                                 <select id="program_id" name="program_id" class="form-control select2 select2-offscreen"
                                     required style="width: 100%;">
                                     <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
-                                    <optgroup label="Sanitasi">
-                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat</option>
-                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah Terpusat
-                                            Skala Permukiman</option>
+                                    <optgroup label="Pembangunan MCK">
+                                        <option value="1">Pembangunan MCK Komunal</option>
+                                        <option value="2">Pembangunan MCK Skala Individu</option>
                                     </optgroup>
-                                    <optgroup label="Air Minum">
-                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
+                                    <optgroup label="SPALD-T">
+                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                    </optgroup>
+                                    <optgroup label="SPALD-S">
+                                        <option value="3">Pembangunan tangki septik komunal (5-10 KK)</option>
+                                        <option value="4">Pembangunan tangki septik skala individual perdesaan minimal 50 KK</option>
                                     </optgroup>
                                 </select>
                             </div>
