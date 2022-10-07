@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Kontrak extends Model
 {
     use HasFactory;
-    protected $table = "db_kontrak";
-    protected $fillable =['program_id','pekerjaan_id','harga_kontrak','no_spk','tgl_spk','tgl_mulai','tgl_selesai','nama_pelaksana','nama_pengawas'];
+
+    protected $table = 'db_kontrak';
+
+    protected $fillable = ['program_id', 'pekerjaan_id', 'harga_kontrak', 'no_spk', 'tgl_spk', 'tgl_mulai', 'tgl_selesai', 'nama_pelaksana', 'nama_pengawas'];
 
     /**
      * Get the user associated with the Kontrak
@@ -20,7 +22,7 @@ class Kontrak extends Model
     {
         return $this->hasOne(Pekerjaan::class, 'id', 'pekerjaan_id');
     }
-    
+
     /**
      * Get the user associated with the Kontrak
      *
@@ -40,5 +42,4 @@ class Kontrak extends Model
     {
         return $this->hasOne(Realisasi::class, 'kontrak_id', 'id');
     }
-
 }

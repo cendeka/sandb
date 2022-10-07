@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Kecamatan;
-
 class Desa extends Model
 {
     use HasFactory;
-    protected $table = "db_desa";
+
+    protected $table = 'db_desa';
 
     /**
      * Get the user associated with the Desa

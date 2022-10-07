@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Pekerjaan;
+
 class Output extends Model
 {
     use HasFactory;
+
     protected $table = 'db_output';
-    protected $fillable = ['pekerjaan_id','komponen','volume','satuan'];
+
+    protected $fillable = ['pekerjaan_id', 'komponen', 'volume', 'satuan'];
 
     /**
      * Get the user associated with the Output
@@ -31,4 +33,3 @@ class Output extends Model
         return $this->hasMany(OutputRealisasi::class, 'output_id', 'id');
     }
 }
-

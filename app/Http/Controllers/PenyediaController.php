@@ -16,8 +16,9 @@ class PenyediaController extends Controller
     {
         //
         $data = Penyedia::get();
-        return view('halaman.penyedia.index',[
-           'data' => $data
+
+        return view('halaman.penyedia.index', [
+            'data' => $data,
         ]);
     }
 
@@ -40,30 +41,28 @@ class PenyediaController extends Controller
      */
     public function store(Request $request)
     {
-        
         $rules = [
             'nama' => 'required|unique:db_penyedia,nama',
             'npwp' => 'required',
 
         ];
-    
+
         $customMessages = [
-            'required' => ':attribute tidak boleh kosong '
+            'required' => ':attribute tidak boleh kosong ',
         ];
 
-        $attributeNames = array(
+        $attributeNames = [
             'nama' => 'Nama Penyedia',
             'npwp' => 'NPWP Penyedia',
-        );
-    
+        ];
+
         $this->validate($request, $rules, $customMessages, $attributeNames);
         $file_sbu = $request->nama.'-SBU'.'.'.$request->file('sbu')->extension();
         $path_sbu = $request->file('sbu')->storeAs('dok_penyedia', $file_sbu, 'public');
 
         $file_iujk = $request->nama.'-IUJK'.'.'.$request->file('iujk')->extension();
         $path_iujk = $request->file('iujk')->storeAs('dok_penyedia', $file_iujk, 'public');
-        
-        
+
         $penyedia = Penyedia::firstOrCreate([
             'sbu' => '/storage/'.$path_sbu,
             'iujk' => '/storage/'.$path_iujk,
@@ -72,7 +71,8 @@ class PenyediaController extends Controller
             'no_tlp' => $request->no_tlp,
             'npwp' => $request->npwp,
 
-        ]);     
+        ]);
+
         return redirect()->route('penyedia')->with('pesan', 'Data Penyedia Berhasil Ditambahkan');
     }
 
@@ -121,6 +121,7 @@ class PenyediaController extends Controller
         //
         $penyedia = Penyedia::find($penyedia);
         $penyedia->delete();
+
         return redirect()->route('penyedia')->with('pesan', 'Data Penyedia Berhasil Dihapus ');
     }
 }

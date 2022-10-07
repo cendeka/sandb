@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +16,9 @@ class KegiatanController extends Controller
     {
         // Halaman Index
         $data = Kegiatan::get();
+
         return view('halaman.kegiatan.index', [
-            'data' => $data
+            'data' => $data,
         ]);
     }
 

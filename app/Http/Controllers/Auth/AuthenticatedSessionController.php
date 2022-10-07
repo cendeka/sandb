@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,18 +31,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $role = Auth::user()->roles->first()->name; 
+        $role = Auth::user()->roles->first()->name;
         switch ($role) {
-          case 'admin':
-            return redirect('/');
-            break;
-          case 'tfl':
-            return redirect('/tfl');
-            break; 
-      
-          default:
-            return '/'; 
-          break;
+            case 'admin':
+                return redirect('/');
+                break;
+            case 'tfl':
+                return redirect('/tfl');
+                break;
+
+            default:
+                return '/';
+                break;
         }
     }
 

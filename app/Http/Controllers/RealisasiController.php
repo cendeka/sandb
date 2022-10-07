@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontrak;
 use App\Models\Realisasi;
 use Illuminate\Http\Request;
-
-use App\Models\Kontrak;
 
 class RealisasiController extends Controller
 {
@@ -17,9 +16,9 @@ class RealisasiController extends Controller
     public function index()
     {
         //Nested relationships kontrak with pekerjaan
-        $data =  Realisasi::with('kontrak.pekerjaan')->get();
+        $data = Realisasi::with('kontrak.pekerjaan')->get();
         // dd($data);
-        return view('halaman.realisasi.index',[
+        return view('halaman.realisasi.index', [
             'data' => $data,
         ]);
     }

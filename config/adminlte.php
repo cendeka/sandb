@@ -227,12 +227,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
+            'type' => 'navbar-search',
+            'text' => 'search',
             'topnav_right' => false,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -243,50 +243,50 @@ return [
         ],
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
         ],
         [
-            'text'        => 'Dashboard',
-            'url'         => '/dashboard',
-            'icon'        => 'fas fa-home',
+            'text' => 'Dashboard',
+            'url' => '/dashboard',
+            'icon' => 'fas fa-home',
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'Kegiatan',
-            'url'  => '/kegiatan',
+            'url' => '/kegiatan',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Pekerjaan',
-            'url'  => '/pekerjaan',
+            'url' => '/pekerjaan',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text' => 'Data Kontrak',
-            'url'  => '/kontrak',
+            'url' => '/kontrak',
             'icon' => 'fas fa-file',
-            'can'  => 'kontrak',
+            'can' => 'kontrak',
         ],
         [
             'text' => 'Realisasi Kontrak',
-            'url'  => '/realisasi',
+            'url' => '/realisasi',
             'icon' => 'fas fa-folder',
         ],
         [
             'text' => 'Daftar Penyedia',
-            'url'  => '/penyedia',
+            'url' => '/penyedia',
             'icon' => 'fas fa-folder',
         ],
         [
-            'text'    => 'Upload Dokumentasi',
-            'icon'    => 'fas fa-folder-open',
+            'text' => 'Upload Dokumentasi',
+            'icon' => 'fas fa-folder-open',
             'submenu' => [
                 [
                     'text' => 'Foto',
-                    'url'  => '/foto/create',
+                    'url' => '/foto/create',
                 ],
                 [
                     'text' => 'Dokumen',
@@ -295,27 +295,27 @@ return [
             ],
         ],
         ['header' => 'Access Control List',
-         'can'      => ['users.index'],
+            'can' => ['users.index'],
         ],
         [
-            'text'    => 'Manajemen Pengguna',
-            'icon'    => 'fa fa-user',
-            'can'      => ['users.index'],
+            'text' => 'Manajemen Pengguna',
+            'icon' => 'fa fa-user',
+            'can' => ['users.index'],
             'submenu' => [
                 [
                     'text' => 'Pengguna',
-                    'url'  => '/users',
-                    'can' =>['users.index']
+                    'url' => '/users',
+                    'can' => ['users.index'],
                 ],
                 [
                     'text' => 'Roles',
                     'url' => '/roles',
-                    'can' => ['roles.index']
+                    'can' => ['roles.index'],
                 ],
                 [
                     'text' => 'Permissions',
                     'url' => '/permissions',
-                    'can' => ['roles.index']
+                    'can' => ['roles.index'],
                 ],
             ],
         ],
@@ -536,7 +536,7 @@ return [
                     'asset' => true,
                     'location' => 'https://adminlte.io/themes/v3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
                 ],
-                 [
+                [
                     'type' => 'css',
                     'asset' => true,
                     'location' => 'https://adminlte.io/themes/v3/plugins/toastr/toastr.min.css',

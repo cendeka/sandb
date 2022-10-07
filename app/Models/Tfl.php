@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tfl extends Model
 {
     use HasFactory;
+
     protected $table = 'db_tfl';
-    protected $fillable = ['user_id','pekerjaan_id'];
+
+    protected $fillable = ['user_id', 'pekerjaan_id'];
 
     /**
      * Get all of the comments for the Tfl

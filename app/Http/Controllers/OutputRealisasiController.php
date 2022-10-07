@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\OutputRealisasi;
 use Illuminate\Http\Request;
-use Alert;
 
 class OutputRealisasiController extends Controller
 {
@@ -15,7 +15,6 @@ class OutputRealisasiController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -43,35 +42,35 @@ class OutputRealisasiController extends Controller
             // 'satuan' => 'required',
 
         ];
-    
+
         $customMessages = [
-            'required' => ':attribute tidak boleh kosong '
+            'required' => ':attribute tidak boleh kosong ',
         ];
 
-        $attributeNames = array(
+        $attributeNames = [
             'pekerjaan_id' => 'Kegiatan',
             'output_id' => 'Komponen',
             'realisasi' => 'Volume Realisasi',
             // 'satuan' => 'Satuan',
-      
-        );
-    
+
+        ];
+
         $this->validate($request, $rules, $customMessages, $attributeNames);
-        $realisasi = $request->realisasi;   
+        $realisasi = $request->realisasi;
         $i = 1;
-        foreach($realisasi as $r)
-        {
+        foreach ($realisasi as $r) {
             $output = OutputRealisasi::updateOrCreate([
                 'output_id' => $request->output_id[$i++],
-            ],[
+            ], [
                 'pekerjaan_id' => $request->pekerjaan_id,
                 'satuan' => $request->satuan[$i++],
                 'realisasi' => $r,
                 // 'satuan' => $request->satuan,
-            ]);    
+            ]);
         }
-           
+
         Alert::success('Target Output', 'Data Target Output Berhasil Ditambahkan');
+
         return redirect()->back();
     }
 

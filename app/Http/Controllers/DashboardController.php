@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pekerjaan;
-
 use App\Models\Kontrak;
+use App\Models\Pekerjaan;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -24,45 +23,45 @@ class DashboardController extends Controller
         if ($total_pagu < 1000000) {
             $pagu = number_format($number);
         // Kurang dari semiliar
-        } else if ($total_pagu < 1000000000) {
-            $pagu = number_format($total_pagu / 1000000, 1, ',', '') . ' Juta';
+        } elseif ($total_pagu < 1000000000) {
+            $pagu = number_format($total_pagu / 1000000, 1, ',', '').' Juta';
         } else {
-        // Sama dengan atau lebih satu miliar
-            $pagu = number_format($total_pagu / 1000000000, 1, ',', '') . ' Miliar';
-        };
+            // Sama dengan atau lebih satu miliar
+            $pagu = number_format($total_pagu / 1000000000, 1, ',', '').' Miliar';
+        }
         //  dd($pekerjaan);
         $am1 = Pekerjaan::where('program_id', '=', 3)->get();
         $am2 = Pekerjaan::where('program_id', '=', 4)->get();
         $am3 = Pekerjaan::where('program_id', '=', 5)->get();
-        $sandak = Pekerjaan::where('program_id','=',1)->get(); 
-        $mck = Pekerjaan::where('program_id','=',2)->get();   
-        
+        $sandak = Pekerjaan::where('program_id', '=', 1)->get();
+        $mck = Pekerjaan::where('program_id', '=', 2)->get();
+
         $get_kontrak = Kontrak::get();
         $total_kontrak = $get_kontrak->sum('harga_kontrak');
         if ($total_kontrak < 1000000) {
-            # code...
+            // code...
             $kontrak = number_format($total_kontrak);
-        } else if ($total_kontrak < 1000000000) {
-            # code...
-            $kontrak = number_format($total_kontrak / 1000000, 1, ',','' ).' Juta';
+        } elseif ($total_kontrak < 1000000000) {
+            // code...
+            $kontrak = number_format($total_kontrak / 1000000, 1, ',', '').' Juta';
         } else {
             $kontrak = number_format($total_kontrak / 1000000000, 1, ',', '').' Miliar';
         }
-        
-        $realisasi_kontrak = number_format($total_kontrak/$total_pagu * 100/100, 2);
-       
-        return view ('pages.dashboard',[
+
+        $realisasi_kontrak = number_format($total_kontrak / $total_pagu * 100 / 100, 2);
+
+        return view('pages.dashboard', [
             'title' => 'Dashboard',
             'am1' => $am1,
             'am2' => $am2,
             'am3' => $am3,
-            'sandak'=> $sandak,
-            'mck'=> $mck,
+            'sandak' => $sandak,
+            'mck' => $mck,
             'pagu' => $pagu,
             'total_pagu' => $total_pagu,
             'total_pekerjaan' => $total_pekerjaan,
             'total_kontrak' => $kontrak,
-            'realisasi' => $realisasi_kontrak
+            'realisasi' => $realisasi_kontrak,
         ]);
     }
 

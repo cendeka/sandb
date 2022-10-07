@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Kegiatan;
-use App\Models\Realisasi;
-use App\Models\Ouput;
-use App\Models\Paket;
 
 
 class Pekerjaan extends Model
 {
     use HasFactory;
-    protected $table = "db_pekerjaan";
-    protected $fillable = ['program_id','nama_pekerjaan','desa_id','kecamatan_id','pagu','tahun_anggaran'];
+
+    protected $table = 'db_pekerjaan';
+
+    protected $fillable = ['program_id', 'nama_pekerjaan', 'desa_id', 'kecamatan_id', 'pagu', 'tahun_anggaran'];
 
     /**
      * Get the user associated with the Pekerjaan
@@ -117,13 +115,13 @@ class Pekerjaan extends Model
         return $this->hasOne(Paket::class, 'pekerjaan_id', 'id');
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($pekerjaan) { // before delete() method call this
-             $pekerjaan->detail()->delete();
-             // do the rest of the cleanup...
+        static::deleting(function ($pekerjaan) { // before delete() method call this
+        $pekerjaan->detail()->delete();
+            // do the rest of the cleanup...
         });
     }
-
 }

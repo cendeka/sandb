@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kontrak;
-use Illuminate\Http\Request;
-use App\Models\Pekerjaan;
 use Alert;
+use App\Models\Kontrak;
+use App\Models\Pekerjaan;
+use Illuminate\Http\Request;
 
 class KontrakController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +20,7 @@ class KontrakController extends Controller
         $data = Kontrak::with('pekerjaan.kegiatan')->get();
         $title = 'Data Kontrak';
         // dd($data);
-        return view('pages.kontrak.index',compact('data','title'));
-        
+        return view('pages.kontrak.index', compact('data', 'title'));
     }
 
     /**
@@ -34,6 +32,7 @@ class KontrakController extends Controller
     {
         //Tambah data kontrak
         $pekerjaan = Pekerjaan::with('detail')->get();
+
         return view('halaman.kontrak.tambah', compact('pekerjaan'));
     }
 
@@ -47,8 +46,8 @@ class KontrakController extends Controller
     {
         //
 
-        $s = Pekerjaan::where('id',$request->pekerjaan_id)->pluck('pagu')->first();
-        $kontrak = 'Rp' . number_format($s, 2, ',', '.');
+        $s = Pekerjaan::where('id', $request->pekerjaan_id)->pluck('pagu')->first();
+        $kontrak = 'Rp'.number_format($s, 2, ',', '.');
 
         // $s = $kontrak->pagu;
         $rules = [
@@ -62,18 +61,16 @@ class KontrakController extends Controller
             'nama_pelaksana' => 'required',
             'nama_pengawas' => 'required',
 
-
-
         ];
-    
+
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
-            'unique'    => ':attribute sudah digunakan',
-            'max' => ':attribute tidak boleh lebih dari pagu '.$kontrak
+            'unique' => ':attribute sudah digunakan',
+            'max' => ':attribute tidak boleh lebih dari pagu '.$kontrak,
 
         ];
-        $string = ['Rp',',00','.'];
-        $attributeNames = array(
+        $string = ['Rp', ',00', '.'];
+        $attributeNames = [
             'program_id' => 'Kegiatan',
             'pekerjaan_id' => 'Pekerjaan',
             'harga_kontrak' => 'Harga Kontrak',
@@ -82,9 +79,9 @@ class KontrakController extends Controller
             'tgl_mulai' => 'Tanggal Mulai',
             'tgl_selesai' => 'Tanggal Selesai',
             'nama_pelaksana' => 'Nama Pelaksana',
-            'nama_pengawas' => 'Nama Pengawas',        
-        );
-    
+            'nama_pengawas' => 'Nama Pengawas',
+        ];
+
         $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
 
         // if ($valid->fails()) {
@@ -103,12 +100,13 @@ class KontrakController extends Controller
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
             'nama_pelaksana' => $request->nama_pelaksana,
-            'nama_pengawas'=>$request->nama_pengawas,
-        ]);     
+            'nama_pengawas' => $request->nama_pengawas,
+        ]);
         Alert::success('Kontrak', 'Data Kontrak Berhasil Ditambahkan');
 
         return redirect('kontrak');
     }
+
     /**
      * Display the specified resource.
      *
@@ -141,14 +139,14 @@ class KontrakController extends Controller
     public function edit(Kontrak $kontrak)
     {
         //
-        $kontrak = Kontrak::with('pekerjaan','kegiatan')->first();
+        $kontrak = Kontrak::with('pekerjaan', 'kegiatan')->first();
         // dd($kontrak);
-        return response()->json($kontrak, 200);    
+        return response()->json($kontrak, 200);
     }
 
     public function edit_kontrak(Request $request)
     {
-        $data = Kontrak::with('pekerjaan','kegiatan')->where('id' , $request->id)->first();
+        $data = Kontrak::with('pekerjaan', 'kegiatan')->where('id', $request->id)->first();
 
         return response()->json($data, 200);
     }
@@ -162,7 +160,7 @@ class KontrakController extends Controller
      */
     public function update(Request $request, Kontrak $kontrak)
     {
-        $s = Pekerjaan::where('id',$request->pekerjaan_id)->pluck('pagu')->first();
+        $s = Pekerjaan::where('id', $request->pekerjaan_id)->pluck('pagu')->first();
         // $kontrak = 'Rp' . number_format($s, 2, ',', '.');
         // $k = $request->no_spk;
 
@@ -178,13 +176,13 @@ class KontrakController extends Controller
             'nama_pelaksana' => 'required',
             'nama_pengawas' => 'required',
         ];
-    
+
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
-            'max' => ':attribute tidak boleh lebih dari pagu '.$s
+            'max' => ':attribute tidak boleh lebih dari pagu '.$s,
         ];
 
-        $attributeNames = array(
+        $attributeNames = [
             'program_id' => 'Kegiatan',
             'pekerjaan_id' => 'Pekerjaan',
             'harga_kontrak' => 'Harga Kontrak',
@@ -193,9 +191,9 @@ class KontrakController extends Controller
             'tgl_mulai' => 'Tanggal Mulai',
             'tgl_selesai' => 'Tanggal Selesai',
             'nama_pelaksana' => 'Nama Pelaksana',
-            'nama_pengawas' => 'Nama Pengawas',        
-        );
-    
+            'nama_pengawas' => 'Nama Pengawas',
+        ];
+
         // $string = ['Rp',',00','.'];
 
         $this->validate($request, $rules, $customMessages, $attributeNames);
@@ -208,9 +206,10 @@ class KontrakController extends Controller
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
             'nama_pelaksana' => $request->nama_pelaksana,
-            'nama_pengawas'=>$request->nama_pengawas,
-        ]);     
+            'nama_pengawas' => $request->nama_pengawas,
+        ]);
         Alert::success('Kontrak', 'Data Kontrak Berhasil Diubah');
+
         return redirect('kontrak');
     }
 
@@ -225,6 +224,7 @@ class KontrakController extends Controller
         //
         $kontrak->delete();
         Alert::success('Kontrak', 'Data Kontrak Berhasil Dihapus');
+
         return redirect('kontrak');
     }
 }

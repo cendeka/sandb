@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokumen;
-use Illuminate\Http\Request;
-
 use App\Models\Pekerjaan;
-
+use Illuminate\Http\Request;
 
 class DokumenController extends Controller
 {
@@ -32,8 +30,8 @@ class DokumenController extends Controller
     {
         //
         $pekerjaan = Pekerjaan::get();
-        
-        return view('halaman.dokumen.tambah',[
+
+        return view('halaman.dokumen.tambah', [
             'pekerjaan' => $pekerjaan,
         ]);
     }
@@ -49,28 +47,28 @@ class DokumenController extends Controller
         //
         $request->validate([
             'files' => 'required',
-          ]);
-  
-          if ($request->hasfile('files')) {
-              $files = $request->file('files');
-  
-              foreach($files as $file) {
-                  $name1 = $request->nama_pekerjaan; 
-                  $ket = $request->keterangan;
-                  $name = $name1.'-'.$ket.'.'.$file->extension();
-                  $path = $file->storeAs('dokumen', $name, 'public');
-  
-                  Dokumen::create([
-                      'file' => $name,
-                      'path' => '/storage/'.$path,
-                      'pekerjaan_id' => $request->pekerjaan_id,
-                      'keterangan' => $request->keterangan
-                    ]);
-              }
-           }
-  
-           return back()->with('pesan', 'Dokumen berhasil diunggah');
+        ]);
+
+        if ($request->hasfile('files')) {
+            $files = $request->file('files');
+
+            foreach ($files as $file) {
+                $name1 = $request->nama_pekerjaan;
+                $ket = $request->keterangan;
+                $name = $name1.'-'.$ket.'.'.$file->extension();
+                $path = $file->storeAs('dokumen', $name, 'public');
+
+                Dokumen::create([
+                    'file' => $name,
+                    'path' => '/storage/'.$path,
+                    'pekerjaan_id' => $request->pekerjaan_id,
+                    'keterangan' => $request->keterangan,
+                ]);
+            }
         }
+
+        return back()->with('pesan', 'Dokumen berhasil diunggah');
+    }
 
     /**
      * Display the specified resource.

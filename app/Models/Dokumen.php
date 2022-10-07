@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Dokumen extends Model
 {
     use HasFactory;
+
     protected $table = 'db_dokumen';
-    protected $fillable = ['pekerjaan_id','file','keterangan','path'];
+
+    protected $fillable = ['pekerjaan_id', 'file', 'keterangan', 'path'];
 
     /**
      * Get the user associated with the Dokumen

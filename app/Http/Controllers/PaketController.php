@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Paket;
 use Illuminate\Http\Request;
-use Alert;
 
 class PaketController extends Controller
 {
@@ -15,11 +15,10 @@ class PaketController extends Controller
      */
     public function index()
     {
-
-
         $data = Paket::with('pekerjaan')->get();
-        $title = "Paket Pekerjaan";
-        return view('pages.pekerjaan.paket',compact('data','title'));
+        $title = 'Paket Pekerjaan';
+
+        return view('pages.pekerjaan.paket', compact('data', 'title'));
     }
 
     /**
@@ -48,26 +47,23 @@ class PaketController extends Controller
             'npwp_pelaksana' => 'required',
             'tahap' => 'required',
 
-
-
         ];
-    
+
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
             // 'unique'    => ':attribute sudah digunakan',
 
         ];
-        $attributeNames = array(
+        $attributeNames = [
             'pekerjaan_id' => 'Pekerjaan',
             'nama_pelaksana' => 'Nama Pelaksana',
             'alamat_pelaksana' => 'Alamat Pelaksana',
-            'npwp_pelaksana' => 'NPWP Pelaksana', 
-            'tahap' => 'Tahap Pelaksanaan',   
-  
-        );
-    
-        $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
+            'npwp_pelaksana' => 'NPWP Pelaksana',
+            'tahap' => 'Tahap Pelaksanaan',
 
+        ];
+
+        $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
 
         $pekerjaan = Paket::firstOrCreate([
             'pekerjaan_id' => $request->pekerjaan_id,
@@ -78,8 +74,9 @@ class PaketController extends Controller
             'aspirasi' => $request->aspirasi,
             'keterangan' => $request->keterangan,
 
-        ]);     
+        ]);
         Alert::success('Paket Pekerjaan', 'Data Paket Pekerjaan Berhasil Ditambahkan');
+
         return redirect('paket');
     }
 
@@ -107,11 +104,10 @@ class PaketController extends Controller
 
     public function edit_paket(Request $request)
     {
-        $data = Paket::with('pekerjaan','pekerjaan.kegiatan')->where('id' , $request->id)->first();
+        $data = Paket::with('pekerjaan', 'pekerjaan.kegiatan')->where('id', $request->id)->first();
 
         return response()->json($data, 200);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -130,25 +126,22 @@ class PaketController extends Controller
             'npwp_pelaksana' => 'required',
             'tahap' => 'required',
 
-
-
         ];
-    
+
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
             // 'unique'    => ':attribute sudah digunakan',
 
         ];
-        $attributeNames = array(
+        $attributeNames = [
             'pekerjaan_id' => 'Pekerjaan',
             'nama_pelaksana' => 'Nama Pelaksana',
             'alamat_pelaksana' => 'Alamat Pelaksana',
-            'npwp_pelaksana' => 'NPWP Pelaksana',   
-            'tahap' => 'Tahapan Pelaksanaan'
-        );
-    
-        $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
+            'npwp_pelaksana' => 'NPWP Pelaksana',
+            'tahap' => 'Tahapan Pelaksanaan',
+        ];
 
+        $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
 
         $paket->update([
             'pekerjaan_id' => $request->pekerjaan_id,
@@ -158,8 +151,9 @@ class PaketController extends Controller
             'aspirasi' => $request->aspirasi,
             'tahap' => $request->tahap,
             'keterangan' => $request->keterangan,
-        ]);     
+        ]);
         Alert::success('Paket Pekerjaan', 'Data Paket Pekerjaan Berhasil Diubah');
+
         return redirect('paket');
     }
 
@@ -173,6 +167,7 @@ class PaketController extends Controller
     {
         $paket->delete();
         Alert::success('Paket Pekerjaan', 'Data Paket Pekerjaan Berhasil Dihapus');
+
         return redirect('paket');
     }
 }

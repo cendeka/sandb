@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Foto;
 use App\Models\Pekerjaan;
-use Illuminate\Http\Request;
 use File;
+use Illuminate\Http\Request;
 use Storage;
-
-use Alert;
 
 class FotoController extends Controller
 {
@@ -21,7 +20,8 @@ class FotoController extends Controller
     {
         //
         $foto = Foto::get();
-        return view('halaman.foto.index',compact('foto'));
+
+        return view('halaman.foto.index', compact('foto'));
     }
 
     /**
@@ -53,35 +53,35 @@ class FotoController extends Controller
         //
         $request->validate([
             'images' => 'required',
-            'keterangan'=>'required',
+            'keterangan' => 'required',
             // 'lat' => 'required',
             // 'long' => 'required',
-          ]);
-  
-          if ($request->hasfile('images')) {
-              $images = $request->file('images');
-  
-              foreach($images as $image) {
-                  $name1 = $request->pekerjaan_id; 
+        ]);
+
+        if ($request->hasfile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $name1 = $request->pekerjaan_id;
                 //   $name2 = $image->getClientOriginalName();
-                  $name = $name1.'-'.uniqid().'.'.$image->extension();
-                  $path = $image->storeAs('foto', $name, 'public');
-  
-                  Foto::create([
-                      'nama' => $name,
-                      'path' => '/storage/'.$path,
-                      'pekerjaan_id' => $request->pekerjaan_id,
-                      'lat' => $request->lat,
-                      'long' => $request->long,
-                      'keterangan' => $request->keterangan
+                $name = $name1.'-'.uniqid().'.'.$image->extension();
+                $path = $image->storeAs('foto', $name, 'public');
 
+                Foto::create([
+                    'nama' => $name,
+                    'path' => '/storage/'.$path,
+                    'pekerjaan_id' => $request->pekerjaan_id,
+                    'lat' => $request->lat,
+                    'long' => $request->long,
+                    'keterangan' => $request->keterangan,
 
-                    ]);
-              }
-           }
-  
-          return back()->with('success', 'Images uploaded successfully');
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Images uploaded successfully');
     }
+
     public function storeFoto(Request $request)
     {
         //
@@ -93,13 +93,12 @@ class FotoController extends Controller
         if ($request->hasfile('images')) {
             $images = $request->file('images');
             $p = 1;
-            foreach($images as $image) {
+            foreach ($images as $image) {
+                $name1 = $request->pekerjaan_id;
+                $progress = $p++;
+                $name = $name1.'-'.uniqid().'.'.$image->extension();
+                $path = $image->storeAs('foto', $name, 'public');
 
-            $name1 = $request->pekerjaan_id; 
-            $progress = $p++;
-            $name = $name1.'-'.uniqid().'.'.$image->extension();
-            $path = $image->storeAs('foto', $name, 'public');
-  
                 Foto::create([
                     'nama' => $name,
                     'path' => '/storage/'.$path,
@@ -109,7 +108,7 @@ class FotoController extends Controller
                 ]);
             }
         }
-  
+
         return back()->with('success', 'Images uploaded successfully');
     }
 
@@ -156,16 +155,17 @@ class FotoController extends Controller
     public function destroy(Foto $foto)
     {
         //
-		$f = Foto::where('id',$foto->id)->first();        
+        $f = Foto::where('id', $foto->id)->first();
         // Storage::delete('/storage/uploads/90-6284f4e48ed37.png');
 
-        if(file_exists(public_path($f->path))){
+        if (file_exists(public_path($f->path))) {
             $foto->delete();
             unlink(public_path($f->path));
-          }else{
+        } else {
             // dd('File not found');
         }
         Alert::success('Foto', 'Data Foto Berhasil Dihapus');
+
         return back();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
@@ -14,21 +13,21 @@ class PermissionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $permissions = Permission::all();
 
         return view('acl.permissions.index', [
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 
     /**
      * Show form for creating permissions
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function create() 
-    {   
+    public function create()
+    {
         return view('acl.permissions.create');
     }
 
@@ -39,9 +38,9 @@ class PermissionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
-            'name' => 'required|unique:users,name'
+            'name' => 'required|unique:users,name',
         ]);
 
         Permission::create($request->only('name'));
@@ -59,7 +58,7 @@ class PermissionsController extends Controller
     public function edit(Permission $permission)
     {
         return view('acl.permissions.edit', [
-            'permission' => $permission
+            'permission' => $permission,
         ]);
     }
 
@@ -73,7 +72,7 @@ class PermissionsController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name' => 'required|unique:permissions,name,'.$permission->id
+            'name' => 'required|unique:permissions,name,'.$permission->id,
         ]);
 
         $permission->update($request->only('name'));

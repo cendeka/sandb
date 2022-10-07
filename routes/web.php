@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
-
-
-
-
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-
-
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -40,8 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','role:admin']], function()
-{
+Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'role:admin']], function () {
     Route::resource('roles', RolesController::class);
     Route::resource('permissions', PermissionsController::class);
     Route::resource('users', UsersController::class);
@@ -64,7 +47,7 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
             'update' => 'pekerjaan.update',
             'show' => 'pekerjaan.detail',
             // etc...
-        ]
+        ],
     ]);
 
     Route::resource('kontrak', KontrakController::class, [
@@ -76,7 +59,7 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
             'update' => 'kontrak.update',
             'show' => 'kontrak.detail',
             // etc...
-        ]
+        ],
     ]);
     // Route::resource('foto', FotoController::class, [
     //     'names' => [
@@ -96,9 +79,9 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
             'store' => 'realisasi.post',
             'edit' => 'dokumen.edit',
             'update' => 'realisasi.update',
-            'show' => 'realisasi.detail'
+            'show' => 'realisasi.detail',
             // etc...
-        ]
+        ],
     ]);
 
     Route::resource('penyedia', PenyediaController::class, [
@@ -108,9 +91,9 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
             'store' => 'penyedia.store',
             'edit' => 'penyedia.edit',
             'update' => 'penyedia.update',
-            'show' => 'penyedia.detail'
+            'show' => 'penyedia.detail',
             // etc...
-        ]
+        ],
     ]);
 
     Route::resource('paket', PaketController::class, [
@@ -118,32 +101,26 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
             'index' => 'paket',
             'store' => 'paket.store',
             'update' => 'paket.update',
-            'show' => 'paket.detail'
+            'show' => 'paket.detail',
             // etc...
-        ]
+        ],
     ]);
     // Route::get('/pekerjaan/{pekerjaan_id}', [PekerjaanController::class, 'pekerjaan.detail']);
     // Single
     Route::post('/tfl/lokasi/', [App\Http\Controllers\UsersController::class, 'lokasi'])->name('tfl.lokasi');
 
-
     Route::get('/cover/kontrak/', [App\Http\Controllers\KontrakController::class, 'cover']);
     Route::get('/edit/kontrak/', [App\Http\Controllers\KontrakController::class, 'edit_kontrak']);
     Route::get('/edit/paket/', [App\Http\Controllers\PaketController::class, 'edit_paket']);
-
-
 
     Route::get('/foto/pekerjaan/{pekerjaan}', [App\Http\Controllers\FotoController::class, 'progress']);
     Route::post('/foto/pekerjaan/post', [App\Http\Controllers\FotoController::class, 'storeFoto']);
 
     Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
 
-
-
     Route::get('/desa/{kec_id}', [App\Http\Controllers\DesaController::class, 'getdesa']);
     Route::get('/pekerjaan/kegiatan/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPekerjaan']);
     Route::get('/pekerjaan/kegiatan/paket/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPaket']);
-
 
     Route::get('/pekerjaan/tahun/{tahun}', [App\Http\Controllers\PekerjaanController::class, 'pekerjaan']);
     Route::get('/edit/pekerjaan/', [App\Http\Controllers\PekerjaanController::class, 'ubahPekerjaan']);
@@ -156,7 +133,7 @@ Route::group(['namespace' => 'App\Http\Controllers','middleware' => ['auth','rol
 
     Route::get('/dok/tambah', [App\Http\Controllers\DokumenController::class, 'create']);
 });
-Route::group(['middleware' => ['auth','role:admin|tfl']], function () {
+Route::group(['middleware' => ['auth', 'role:admin|tfl']], function () {
     Route::get('/tfl', [App\Http\Controllers\PekerjaanController::class, 'tfl_index'])->name('tfl');
     Route::get('/sanitasi/dak/{pekerjaan}', [App\Http\Controllers\PekerjaanController::class, 'tfl_show']);
     Route::post('/realisasi/output/', [App\Http\Controllers\OutputRealisasiController::class, 'store'])->name('realisasi.output');
@@ -164,10 +141,6 @@ Route::group(['middleware' => ['auth','role:admin|tfl']], function () {
     Route::delete('foto/hapus/{foto}', [App\Http\Controllers\FotoController::class, 'destroy'])->name('foto.hapus');
     Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
     Route::post('/dok/post', [App\Http\Controllers\DokumenController::class, 'store'])->name('dokumen.post');
-
-
-
 });
-
 
 require __DIR__.'/auth.php';
