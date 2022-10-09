@@ -17,10 +17,12 @@
     <style>
         #map {
             height: 300px;
+            z-index: 0;
         }
 
         #mapid {
             height: 300px;
+            z-index: 0;
         }
 
     </style>
@@ -36,8 +38,8 @@
 @endsection
 
 @section('breadcrumb-items')
-    {{-- <li class="breadcrumb-item">Kontrak</li> --}}
-    {{-- <li class="breadcrumb-item active">Kegiatan</li> --}}
+    <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item active">Kegiatan</li>
 @endsection
 
 @section('content')
@@ -314,8 +316,7 @@
                             </div>
                             <br>
                             <div class="row">
-                                <button id="clickMe" class="btn btn-primary btn-toast" type="button">Tampilkan
-                                    Lokasi</button>
+                                <button id="clickMe" class="btn btn-primary btn-toast" type="button">Dapatkan Koordinat</button>
                             </div>
                             <br>
                             <div class="row">

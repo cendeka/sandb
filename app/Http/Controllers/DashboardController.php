@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $total_pekerjaan = $pekerjaan->count();
         // Kurang dari sejuta
         if ($total_pagu < 1000000) {
-            $pagu = number_format($number);
+            $pagu = number_format($total_pagu);
         // Kurang dari semiliar
         } elseif ($total_pagu < 1000000000) {
             $pagu = number_format($total_pagu / 1000000, 1, ',', '').' Juta';
@@ -48,7 +48,7 @@ class DashboardController extends Controller
             $kontrak = number_format($total_kontrak / 1000000000, 1, ',', '').' Miliar';
         }
 
-        $realisasi_kontrak = number_format($total_kontrak / $total_pagu * 100 / 100, 2);
+        $realisasi_kontrak = divnum($total_kontrak,$total_pagu) ;
 
         return view('pages.dashboard', [
             'title' => 'Dashboard',

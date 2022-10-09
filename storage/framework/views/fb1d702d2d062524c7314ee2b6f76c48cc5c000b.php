@@ -13,6 +13,11 @@
     <div class="wrapper">
 
         
+        <?php if($layoutHelper->isPreloaderEnabled()): ?>
+            <?php echo $__env->make('adminlte::partials.common.preloader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+
+        
         <?php if($layoutHelper->isLayoutTopnavEnabled()): ?>
             <?php echo $__env->make('adminlte::partials.navbar.navbar-layout-topnav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php else: ?>

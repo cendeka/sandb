@@ -103,7 +103,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-tambah">
-                    <form class="needs-validation" novalidate="" action="<?php echo e(route('paket.store')); ?>" method="POST">
+                    <form class="needs-validation" novalidate="" action="<?php echo e(route('kegiatan.store')); ?>" method="POST">
                         <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="mb-3">
@@ -225,7 +225,7 @@
                                 <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
                                         Batal
                                     </a></div>
-                                <form action="<?php echo e(route('paket.destroy', $d->id)); ?>" method="post">
+                                <form action="<?php echo e(route('kegiatan.destroy', $d->id)); ?>" method="post">
                                     <?php echo method_field('DELETE'); ?>
                                     <?php echo csrf_field(); ?>
                                     <div class="col">
