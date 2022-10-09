@@ -10,7 +10,7 @@
         <h3 class="card-title">Bidang Air Minum dan Sanitasi Tahun Anggaran 2022</h3>
     </div>
     <div class="card-body">
-        <form action="<?php echo e(route('pekerjaan.store')); ?>" method="POST">
+        <form action="<?php echo e(route('program.store')); ?>" method="POST">
             <?php echo csrf_field(); ?>
             <div class="form-group">
                 <label>Kegiatan</label>

@@ -66,7 +66,7 @@
                  <div class="modal-body">Apakah Anda yakin akan menghapus data <?php echo e($d->nama_pekerjaan); ?>?</div>
                  <div class="modal-footer">
                     <button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-                    <form action="<?php echo e(route('pekerjaan.destroy', $d->id)); ?>" method="post">
+                    <form action="<?php echo e(route('program.destroy', $d->id)); ?>" method="post">
                      <?php echo method_field('DELETE'); ?>
                      <?php echo csrf_field(); ?>
                      <input class="btn btn-danger" type="submit" value="Hapus" />

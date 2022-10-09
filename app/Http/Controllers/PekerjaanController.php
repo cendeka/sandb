@@ -94,11 +94,11 @@ class PekerjaanController extends Controller
         //Air Minum
         $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('program_id', $id)->get();
         $kec = Kecamatan::get();
-        $kegiatan = kegiatan::where('id', $id)->get('sub_kegiatan');
+        $kegiatan = kegiatan::where('id', $id)->get('detail_kegiatan');
 
         return view('pages.pekerjaan.index', [
             'data' => $data,
-            'title' => $kegiatan[0]->sub_kegiatan,
+            'title' => $kegiatan[0]->detail_kegiatan,
             'kec' => $kec,
         ]);
     }
@@ -141,7 +141,7 @@ class PekerjaanController extends Controller
         $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->get();
 
         return view('pages.pekerjaan.index', [
-            'title' => 'Bidang Air Minum dan Sanitasi',
+            'title' => 'Database Sanitasi',
             'data' => $data,
             'kec' => $kec,
         ]);

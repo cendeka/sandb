@@ -72,9 +72,9 @@
                                         @endphp
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $item->pekerjaan->kegiatan->sub_kegiatan }}</td>
+                                            <td>{{ $item->pekerjaan->kegiatan->sub_kegiatan ?? '' }}</td>
                                             <td><a
-                                                    href="/pekerjaan/{{ $item->pekerjaan->id }}">{{ $item->pekerjaan->nama_pekerjaan }}</a>
+                                                    href="/pekerjaan/{{ $item->pekerjaan->id ?? '' }}">{{ $item->pekerjaan->nama_pekerjaan ?? '' }}</a>
                                             </td>
                                             <td>{{ $item->no_spk }}</td>
                                             <td>{{ date('j F, Y', strtotime($item->tgl_spk)) }}</td>
@@ -226,7 +226,7 @@
                                 d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
                         </svg>
                         <h3>Apakah anda yakin?</h3>
-                        <div class="text-muted">Hapus Data Kontrak Kegiatan {{ $d->pekerjaan->nama_pekerjaan }}</div>
+                        <div class="text-muted">Hapus Data Kontrak Kegiatan {{ $d->pekerjaan->nama_pekerjaan ?? '' }}</div>
                     </div>
                     <div class="modal-footer">
                         <div class="w-100">

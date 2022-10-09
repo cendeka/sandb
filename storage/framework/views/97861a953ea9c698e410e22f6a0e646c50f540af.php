@@ -18,12 +18,11 @@
             left: auto !important;
             top: auto !important;
         }
-
     </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3><?php echo e($title); ?></h3>
+    <h5><?php echo e($title); ?></h5>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>
@@ -37,10 +36,11 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Tahun Anggaran 2022</h5>
+                        <h6></h6>
                         <div class="card-header-right">
-                            <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#modal-pekerjaan"
-                                data-bs-original-title="" title=""> <span class="fa fa-edit"></span>
+                            <a class="btn btn-primary" href="#" data-bs-toggle="modal"
+                                data-bs-target="#modal-pekerjaan" data-bs-original-title="" title=""> <span
+                                    class="fa fa-edit"></span>
                                 Tambah
                             </a>
                         </div>
@@ -80,8 +80,8 @@
                                                         data-bs-target="#modal-hapus<?php echo e($item->id); ?>"><i
                                                             class="fa fa-trash"></i></button>
                                                     <button class="btn btn-warning btn-edit" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-ubah" id="edit-item" data-id="<?php echo e($item->id); ?>"
-                                                        data-id="<?php echo e($item->id); ?>"><i
+                                                        data-bs-target="#modal-ubah" id="edit-item"
+                                                        data-id="<?php echo e($item->id); ?>" data-id="<?php echo e($item->id); ?>"><i
                                                             class="fa fa-edit"></i></button>
                                                 </div>
                                             </td>
@@ -95,8 +95,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bd-example-modal-lg" id="modal-pekerjaan" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal-pekerjaan" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="modal-content">
                 <div class="modal-header">
@@ -118,17 +118,20 @@
                                     </optgroup>
                                     <optgroup label="SPALD-T">
                                         <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK
+                                        </option>
                                     </optgroup>
                                     <optgroup label="SPALD-S">
-                                        <option value="3">Pembangunan tangki septik komunal (5-10 KK)</option>
-                                        <option value="4">Pembangunan tangki septik skala individual perdesaan minimal 50 KK</option>
+                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
+                                            50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pekerjaan_id">Nama Pekerjaan</label>
-                                <input type="text" name="nama_pekerjaan" class="form-control" required>
+                                <input type="text" id="nama_pekerjaan" name="nama_pekerjaan" class="form-control"
+                                    required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -157,7 +160,8 @@
                                 <div class="col-lg-12">
                                     <div>
                                         <label for="Pagu">Pagu</label>
-                                        <input type="text" class="form-control" name="pagu" data-type="currency" id="currency-field" placeholder="Input Pagu" required>
+                                        <input type="text" class="form-control" name="pagu" data-type="currency"
+                                            id="currency-field" placeholder="Input Pagu" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -181,44 +185,43 @@
         </div>
     </div>
     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="modal modal-blur fade" id="modal-hapus<?php echo e($d->id); ?>" role="dialog"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-status bg-danger"></div>
-                <div class="modal-body text-center py-4">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 9v2m0 4v.01" />
-                        <path
-                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
-                    </svg>
-                    <h3>Apakah anda yakin?</h3>
-                    <div class="text-muted">Hapus Data Kontrak Kegiatan <?php echo e($d->nama_pekerjaan); ?></div>
-                </div>
-                <div class="modal-footer">
-                    <div class="w-100">
-                        <div class="row">
-                            <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
-                                    Batal
-                                </a></div>
-                            <form action="<?php echo e(route('pekerjaan.destroy', $d->id)); ?>" method="post">
-                                <?php echo method_field('DELETE'); ?>
-                                <?php echo csrf_field(); ?>
-                                <div class="col">
-                                    <button class="btn btn-danger w-100" type="submit">Hapus</button>
-                                </div>
-                            </form>
+        <div class="modal modal-blur fade" id="modal-hapus<?php echo e($d->id); ?>" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-status bg-danger"></div>
+                    <div class="modal-body text-center py-4">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 9v2m0 4v.01" />
+                            <path
+                                d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
+                        </svg>
+                        <h3>Apakah anda yakin?</h3>
+                        <div class="text-muted">Hapus Data Kontrak Kegiatan <?php echo e($d->nama_pekerjaan); ?></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                        Batal
+                                    </a></div>
+                                <form action="<?php echo e(route('pekerjaan.destroy', $d->id)); ?>" method="post">
+                                    <?php echo method_field('DELETE'); ?>
+                                    <?php echo csrf_field(); ?>
+                                    <div class="col">
+                                        <button class="btn btn-danger w-100" type="submit">Hapus</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <div class="modal fade bd-example-modal-lg" id="modal-ubah" name="modal-ubah" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -235,30 +238,38 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label>Program</label>
-                                <select id="program" name="program_id" class="form-control select2 select-ubah select2-offscreen"
-                                    required style="width: 100%;">
+                                <select id="program" name="program_id"
+                                    class="form-control select2 select-ubah select2-offscreen" required
+                                    style="width: 100%;">
                                     <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
                                     <optgroup label="Sanitasi">
-                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat</option>
-                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah Terpusat
+                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat
+                                        </option>
+                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah
+                                            Terpusat
                                             Skala Permukiman</option>
                                     </optgroup>
                                     <optgroup label="Air Minum">
-                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
+                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan
+                                        </option>
+                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan
+                                        </option>
+                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan
+                                        </option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pekerjaan_id">Nama Pekerjaan</label>
-                                <input id="pekerjaan" type="text" name="nama_pekerjaan" class="form-control" required>
+                                <input id="pekerjaan" type="text" name="nama_pekerjaan" class="form-control"
+                                    required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div>
                                         <label>Kecamatan</label>
-                                        <select id="kec" name="kecamatan_id" class="form-control select2 select-ubah select2-offscreen"
+                                        <select id="kec" name="kecamatan_id"
+                                            class="form-control select2 select-ubah select2-offscreen"
                                             style="width: 100%;" required>
                                             <option value="">Pilih Kecamatan</option>
                                             <?php $__currentLoopData = $kec; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -270,7 +281,8 @@
                                 <div class="col-lg-6">
                                     <div>
                                         <label class="form-label">Pilih Desa</label>
-                                        <select id="desa" value="" name="desa_id" id="desa_id" class="form-control select2 select-ubah select2-offscreen"
+                                        <select id="desa" value="" name="desa_id" id="desa_id"
+                                            class="form-control select2 select-ubah select2-offscreen"
                                             style="width: 100%;" required>
                                             <option value="">Pilih Desa</option>
                                         </select>
@@ -281,13 +293,15 @@
                                 <div class="col-lg-12">
                                     <div>
                                         <label for="Pagu">Pagu</label>
-                                        <input id="n_pagu" type="text" class="form-control" name="pagu" data-type="currency" id="currency-field" placeholder="Input Pagu" required>
+                                        <input id="n_pagu" type="text" class="form-control" name="pagu"
+                                            data-type="currency" id="currency-field" placeholder="Input Pagu" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div>
                                         <label for="">Tahun Anggaran</label>
-                                        <select id="ta" name="tahun_anggaran" class="form-control select2 select-ubah" required>
+                                        <select id="ta" name="tahun_anggaran"
+                                            class="form-control select2 select-ubah" required>
                                             <option value="2022">2022</option>
                                             <option value="2021">2021</option>
                                         </select>
@@ -354,7 +368,7 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('form').attr('action', "<?php echo e(url('pekerjaan')); ?>/"+res.id);
+                    $('form').attr('action', "<?php echo e(url('pekerjaan')); ?>/" + res.id);
                     $('#pekerjaan').val(res.nama_pekerjaan);
                     $('#n_pagu').val(res.pagu);
                     $('#ta').val(res.tahun_anggaran);
@@ -422,7 +436,7 @@
             })
 
         })
-        $('select:not(.normal)').each(function () {
+        $('select:not(.normal)').each(function() {
             $(this).select2({
                 dropdownParent: $(this).parent()
             });
@@ -431,25 +445,10 @@
     <script>
         jQuery(document).ready(function() {
             jQuery($('#program_id')).on('change', function() {
-                var kegID = jQuery(this).val();
-                if (kegID) {
-                    jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/' + kegID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery($('#pekerjaan_id')).empty();
-                            jQuery.each(data, function(key, value) {
-                                    $($('#pekerjaan_id')).append('<option value="' +
-                                        value.id + '">' + value.nama_pekerjaan +
-                                        '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $($('#pekerjaan_id')).empty();
-                }
+                console.log($("#program_id option:selected").text());
+                $('#nama_pekerjaan').val($("#program_id option:selected").text());
+
+
             });
         });
     </script>

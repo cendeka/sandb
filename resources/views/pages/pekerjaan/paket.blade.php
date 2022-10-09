@@ -25,12 +25,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>Data Paket Pekerjaan</h3>
+    <h5>Detail Kegiatan</h5>
 @endsection
 
 @section('breadcrumb-items')
-    <li class="breadcrumb-item">Data</li>
-    <li class="breadcrumb-item active">Kontrak</li>
+    <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item active">Kegiatan</li>
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Tahun Anggaran 2022</h5>
+                        <h5>Detail Rincian Kegiatan</h5>
                         <div class="card-header-right">
                             <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#modal-paket"
                                 data-bs-original-title="" title=""> <span class="fa fa-edit"></span>
@@ -103,7 +103,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-tambah">
-                    <form class="needs-validation" novalidate="" action="{{ route('paket.store') }}" method="POST">
+                    <form class="needs-validation" novalidate="" action="{{ route('rincian.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
@@ -225,7 +225,7 @@
                                 <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
                                         Batal
                                     </a></div>
-                                <form action="{{ route('paket.destroy', $d->id) }}" method="post">
+                                <form action="{{ route('rincian.destroy', $d->id) }}" method="post">
                                     @method('DELETE')
                                     @csrf
                                     <div class="col">
@@ -398,13 +398,13 @@
 
             $.ajax({
                 type: "GET",
-                url: "{{ url('edit/paket') }}",
+                url: "{{ url('edit/rincian') }}",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('form').attr('action', 'paket/'+res.id);
+                    $('form').attr('action', 'rincian/'+res.id);
                     $('#pelaksana').val(res.nama_pelaksana);
                     $('#npwp').val(res.npwp_pelaksana);
                     $('#alamat').val(res.alamat_pelaksana);
@@ -474,7 +474,7 @@
                 var kegID = jQuery(this).val();
                 if (kegID) {
                     jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/paket/' + kegID,
+                        url: '/pekerjaan/kegiatan/rincian/' + kegID,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {

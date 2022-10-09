@@ -23,12 +23,12 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3>Data Paket Pekerjaan</h3>
+    <h5>Detail Kegiatan</h5>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>
-    <li class="breadcrumb-item">Data</li>
-    <li class="breadcrumb-item active">Kontrak</li>
+    <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item active">Kegiatan</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -37,7 +37,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Tahun Anggaran 2022</h5>
+                        <h5>Detail Rincian Kegiatan</h5>
                         <div class="card-header-right">
                             <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#modal-paket"
                                 data-bs-original-title="" title=""> <span class="fa fa-edit"></span>
@@ -101,7 +101,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-tambah">
-                    <form class="needs-validation" novalidate="" action="<?php echo e(route('paket.store')); ?>" method="POST">
+                    <form class="needs-validation" novalidate="" action="<?php echo e(route('rincian.store')); ?>" method="POST">
                         <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="mb-3">
@@ -223,7 +223,7 @@
                                 <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
                                         Batal
                                     </a></div>
-                                <form action="<?php echo e(route('paket.destroy', $d->id)); ?>" method="post">
+                                <form action="<?php echo e(route('rincian.destroy', $d->id)); ?>" method="post">
                                     <?php echo method_field('DELETE'); ?>
                                     <?php echo csrf_field(); ?>
                                     <div class="col">
@@ -396,13 +396,13 @@
 
             $.ajax({
                 type: "GET",
-                url: "<?php echo e(url('edit/paket')); ?>",
+                url: "<?php echo e(url('edit/rincian')); ?>",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('form').attr('action', 'paket/'+res.id);
+                    $('form').attr('action', 'rincian/'+res.id);
                     $('#pelaksana').val(res.nama_pelaksana);
                     $('#npwp').val(res.npwp_pelaksana);
                     $('#alamat').val(res.alamat_pelaksana);
@@ -419,7 +419,8 @@
     </script>
    <script>
     $('select:not(.normal)').each(function () {
-        $(this).select2({
+        $(this).select2
+        ({
             dropdownParent: $(this).parent()
         });
     });
@@ -471,7 +472,7 @@
                 var kegID = jQuery(this).val();
                 if (kegID) {
                     jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/paket/' + kegID,
+                        url: '/pekerjaan/kegiatan/rincian/' + kegID,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {

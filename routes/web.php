@@ -96,12 +96,12 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
         ],
     ]);
 
-    Route::resource('paket', PaketController::class, [
+    Route::resource('rincian', PaketController::class, [
         'names' => [
-            'index' => 'paket',
-            'store' => 'paket.store',
-            'update' => 'paket.update',
-            'show' => 'paket.detail',
+            'index' => 'rincian',
+            'store' => 'rincian.store',
+            'update' => 'rincian.update',
+            'show' => 'rincian.detail',
             // etc...
         ],
     ]);
@@ -111,7 +111,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::get('/cover/kontrak/', [App\Http\Controllers\KontrakController::class, 'cover']);
     Route::get('/edit/kontrak/', [App\Http\Controllers\KontrakController::class, 'edit_kontrak']);
-    Route::get('/edit/paket/', [App\Http\Controllers\PaketController::class, 'edit_paket']);
+    Route::get('/edit/rincian/', [App\Http\Controllers\PaketController::class, 'edit_paket']);
 
     Route::get('/foto/pekerjaan/{pekerjaan}', [App\Http\Controllers\FotoController::class, 'progress']);
     Route::post('/foto/pekerjaan/post', [App\Http\Controllers\FotoController::class, 'storeFoto']);
@@ -120,7 +120,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::get('/desa/{kec_id}', [App\Http\Controllers\DesaController::class, 'getdesa']);
     Route::get('/pekerjaan/kegiatan/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPekerjaan']);
-    Route::get('/pekerjaan/kegiatan/paket/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPaket']);
+    Route::get('/pekerjaan/kegiatan/rincian/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPaket']);
 
     Route::get('/pekerjaan/tahun/{tahun}', [App\Http\Controllers\PekerjaanController::class, 'pekerjaan']);
     Route::get('/edit/pekerjaan/', [App\Http\Controllers\PekerjaanController::class, 'ubahPekerjaan']);
@@ -128,7 +128,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     //V1.2
     //TFL
     //Air Minum
-    Route::get('/kegiatan', [App\Http\Controllers\KegiatanController::class, 'index']);
+    Route::get('/kegiatan', [App\Http\Controllers\PekerjaanController::class, 'index']);
     Route::get('/kegiatan/{id}', [App\Http\Controllers\PekerjaanController::class, 'kegiatan'])->name('kegiatan');
 
     Route::get('/dok/tambah', [App\Http\Controllers\DokumenController::class, 'create']);

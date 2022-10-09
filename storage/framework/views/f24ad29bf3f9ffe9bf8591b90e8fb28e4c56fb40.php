@@ -16,10 +16,12 @@
     <style>
         #map {
             height: 300px;
+            z-index: 0;
         }
 
         #mapid {
             height: 300px;
+            z-index: 0;
         }
 
     </style>
@@ -35,8 +37,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-items'); ?>
-    
-    
+    <li class="breadcrumb-item">Detail</li>
+    <li class="breadcrumb-item active">Kegiatan</li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -249,8 +251,7 @@
                             </div>
                             <br>
                             <div class="row">
-                                <button id="clickMe" class="btn btn-primary btn-toast" type="button">Tampilkan
-                                    Lokasi</button>
+                                <button id="clickMe" class="btn btn-primary btn-toast" type="button">Dapatkan Koordinat</button>
                             </div>
                             <br>
                             <div class="row">
