@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foto;
 use App\Models\Kontrak;
 use App\Models\Pekerjaan;
+use App\Models\Rincian;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,7 +18,9 @@ class DashboardController extends Controller
     public function index()
     {
         //Variabel Statistik
-        $pekerjaan = Pekerjaan::with('kegiatan')->get();
+        $foto = Foto::with('pekerjaan')->get();
+        $pekerjaan = Pekerjaan::with('kegiatan', 'foto')->get();
+        $penerima_manfaat = Rincian::sum('outcome');
         $total_pagu = $pekerjaan->sum('pagu');
         $total_pekerjaan = $pekerjaan->count();
         // Kurang dari sejuta
@@ -48,7 +52,7 @@ class DashboardController extends Controller
             $kontrak = number_format($total_kontrak / 1000000000, 1, ',', '').' Miliar';
         }
 
-        $realisasi_kontrak = divnum($total_kontrak,$total_pagu) ;
+        $realisasi_kontrak = divnum($total_kontrak, $total_pagu);
 
         return view('pages.dashboard', [
             'title' => 'Dashboard',
@@ -62,6 +66,9 @@ class DashboardController extends Controller
             'total_pekerjaan' => $total_pekerjaan,
             'total_kontrak' => $kontrak,
             'realisasi' => $realisasi_kontrak,
+            'penerima_manfaat' => $penerima_manfaat,
+            'foto' => $foto,
+
         ]);
     }
 

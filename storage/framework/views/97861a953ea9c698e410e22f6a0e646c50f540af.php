@@ -10,15 +10,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('style'); ?>
-    <style>
-        .select2-offscreen,
-        .select2-offscreen:focus {
-            // Keep original element in the same spot
-            // So that HTML5 valiation message appear in the correct position
-            left: auto !important;
-            top: auto !important;
-        }
-    </style>
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
@@ -107,34 +99,30 @@
                     <form class="needs-validation" novalidate="" action="<?php echo e(route('pekerjaan.store')); ?>" method="POST">
                         <?php echo csrf_field(); ?>
                         <div class="modal-body">
-                            <div class="mb-3">
-                                <label>Program</label>
-                                <select id="program_id" name="program_id" class="form-control select2 select2-offscreen"
-                                    required style="width: 100%;">
-                                    <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
-                                    <optgroup label="Pembangunan MCK">
-                                        <option value="1">Pembangunan MCK Komunal</option>
-                                        <option value="2">Pembangunan MCK Skala Individu</option>
-                                    </optgroup>
-                                    <optgroup label="SPALD-T">
-                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <label>Program</label>
+                                    <select id="program_id" name="program_id" class="form-control select2 select2-offscreen"
+                                        required style="width: 100%;">
+                                        <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan
                                         </option>
-                                    </optgroup>
-                                    <optgroup label="SPALD-S">
-                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
-                                            50 KK </option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pekerjaan_id">Nama Pekerjaan</label>
-                                <input type="text" id="nama_pekerjaan" name="nama_pekerjaan" class="form-control"
-                                    required>
+                                        <optgroup label="Pembangunan MCK">
+                                            <option value="1">Pembangunan MCK Komunal</option>
+                                            <option value="2">Pembangunan MCK Skala Individu</option>
+                                        </optgroup>
+                                        <optgroup label="SPALD-T">
+                                            <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
+                                            <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                        </optgroup>
+                                        <optgroup label="SPALD-S">
+                                            <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
+                                            <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
+                                        </optgroup>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 mb-3">
                                     <div>
                                         <label>Kecamatan</label>
                                         <select id="kecamatan_id" name="kecamatan_id" class="form-control select2"
@@ -146,30 +134,44 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 mb-3">
                                     <div>
                                         <label class="form-label">Pilih Desa</label>
-                                        <select value="" name="desa_id" id="desa_id" class="form-control select2"
+                                        <select name="desa_id" id="desa_id" class="form-control select2"
                                             style="width: 100%;" required>
-                                            <option value="">Pilih Desa</option>
+                                            <option selected value="">Pilih Desa</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-3">
                                     <div>
-                                        <label for="Pagu">Pagu</label>
-                                        <input type="text" class="form-control" name="pagu" data-type="currency"
-                                            id="currency-field" placeholder="Input Pagu" required>
+                                        <label for="nama_pekerjaan">Nama Pekerjaan</label>
+                                        <input type="text" id="nama_pekerjaan" name="nama_pekerjaan"
+                                            class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 mb-3">
+                                    <div>
+                                        <label for="Pagu">Pagu</label>
+                                        <input class="form-control input-mask" name="pagu" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
                                     <div>
                                         <label for="">Tahun Anggaran</label>
                                         <select name="tahun_anggaran" class="form-control select2" required>
+                                            <option value="" selected>Pilih Tahun</option>
                                             <option value="2022">2022</option>
                                             <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
                                         </select>
                                     </div>
                                 </div>
@@ -185,21 +187,12 @@
         </div>
     </div>
     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="modal modal-blur fade" id="modal-hapus<?php echo e($d->id); ?>" role="dialog" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="modal-hapus<?php echo e($d->id); ?>" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-status bg-danger"></div>
-                    <div class="modal-body text-center py-4">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
-                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 9v2m0 4v.01" />
-                            <path
-                                d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
-                        </svg>
+                    <div class="modal-body text-center py-4">                       
                         <h3>Apakah anda yakin?</h3>
                         <div class="text-muted">Hapus Data Kontrak Kegiatan <?php echo e($d->nama_pekerjaan); ?></div>
                     </div>
@@ -228,7 +221,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Kegiatan</h5>
+                    <h5 class="modal-title">Ubah Data Kegiatan</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -238,24 +231,21 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label>Program</label>
-                                <select id="program" name="program_id"
-                                    class="form-control select2 select-ubah select2-offscreen" required
-                                    style="width: 100%;">
+                                <select id="program" name="program_id" class="form-control select2 select-ubah"
+                                    required style="width: 100%;">
                                     <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
-                                    <optgroup label="Sanitasi">
-                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat
-                                        </option>
-                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah
-                                            Terpusat
-                                            Skala Permukiman</option>
+                                    <optgroup label="Pembangunan MCK">
+                                        <option value="1">Pembangunan MCK Komunal</option>
+                                        <option value="2">Pembangunan MCK Skala Individu</option>
                                     </optgroup>
-                                    <optgroup label="Air Minum">
-                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan
-                                        </option>
-                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan
-                                        </option>
-                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan
-                                        </option>
+                                    <optgroup label="SPALD-T">
+                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                    </optgroup>
+                                    <optgroup label="SPALD-S">
+                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
+                                            50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -269,8 +259,7 @@
                                     <div>
                                         <label>Kecamatan</label>
                                         <select id="kec" name="kecamatan_id"
-                                            class="form-control select2 select-ubah select2-offscreen"
-                                            style="width: 100%;" required>
+                                            class="form-control select2 select-ubah" style="width: 100%;" required>
                                             <option value="">Pilih Kecamatan</option>
                                             <?php $__currentLoopData = $kec; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($item->id); ?>"><?php echo e($item->n_kec); ?></option>
@@ -281,29 +270,34 @@
                                 <div class="col-lg-6">
                                     <div>
                                         <label class="form-label">Pilih Desa</label>
-                                        <select id="desa" value="" name="desa_id" id="desa_id"
-                                            class="form-control select2 select-ubah select2-offscreen"
-                                            style="width: 100%;" required>
+                                        <select id="desa" value="" name="desa_id"
+                                            class="form-control select2 select-ubah" style="width: 100%;" required>
                                             <option value="">Pilih Desa</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-8 mb-3">
                                     <div>
                                         <label for="Pagu">Pagu</label>
-                                        <input id="n_pagu" type="text" class="form-control" name="pagu"
-                                            data-type="currency" id="currency-field" placeholder="Input Pagu" required>
+                                        <input id="n_pagu" class="form-control input-mask" name="pagu"
+                                            placeholder="Input Pagu" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-4 mb-3">
                                     <div>
                                         <label for="">Tahun Anggaran</label>
                                         <select id="ta" name="tahun_anggaran"
                                             class="form-control select2 select-ubah" required>
+                                            <option selected>Pilih Tahun</option>
                                             <option value="2022">2022</option>
                                             <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
                                         </select>
                                     </div>
                                 </div>
@@ -345,21 +339,69 @@
     <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/form-validation-custom.js')); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <script>
+        $(document).on('change', function() {
+            $(".input-mask").inputmask({
+                alias: 'numeric',
+                groupSeparator: '.',
+                radixPoint: ',',
+                autoGroup: true,
+                prefix: 'Rp',
+                placeholder: '0',
+                autoUnmask: true,
+                removeMaskOnSubmit: true
+            });
+        });
+    </script>
     <script>
         <?php if($errors->any()): ?>
             Swal.fire({
                 title: 'Error!',
-                text: '<?php echo e(implode('', $errors->all(':message'))); ?>',
+                html: '<?php echo implode('', $errors->all('<div>:message</div>')); ?>',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
         <?php endif; ?>
+        <?php if(session()->has('message')): ?>
+            swal.fire({
+                title: 'Simpan Data',
+                text: '<?php echo e(session('message')); ?>',
+                icon: 'success',
+                timer: 3000,
+            });
+        <?php endif; ?>
+    </script>
+    <script>
+        $(document).on('click', '.btn', function() {
+            var id = $(this).data('id');
+            jQuery($('#kecamatan_id,#kec')).on('change', function() {
+                var KecID = jQuery(this).val();
+                if (KecID) {
+                    jQuery.ajax({
+                        url: '/desa/' + KecID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $($('#desa_id,#desa')).empty();
+                            jQuery.each(data, function(key, value) {
+                                function populate(selector) {
+                                    $(selector)
+                                    .append('<option value="' + key + '">' + value +'</option>')
+                                }
+                                populate('#desa_id,#desa');
+                            });
+                        }
+                    });
+                } else {
+                    $($('#desa_id')).empty();
+                }
+            });
+        })
     </script>
     <script>
         $(document).on('click', '.btn-edit', function() {
             var id = $(this).data('id');
-            console.log(id);
-
             $.ajax({
                 type: "GET",
                 url: "<?php echo e(url('edit/pekerjaan')); ?>",
@@ -385,7 +427,6 @@
             });
         })
     </script>
-
     <script>
         $(document).ready(function() {
             $('#example1').DataTable({
@@ -436,153 +477,15 @@
             })
 
         })
-        $('select:not(.normal)').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent()
-            });
-        });
     </script>
     <script>
         jQuery(document).ready(function() {
-            jQuery($('#program_id')).on('change', function() {
-                console.log($("#program_id option:selected").text());
-                $('#nama_pekerjaan').val($("#program_id option:selected").text());
-
-
+            jQuery($('#kecamatan_id,#desa_id,#program_id')).change(function() {
+                $('#nama_pekerjaan').val($("#program_id option:selected").text() + " Desa " + $(
+                    "#desa_id option:selected").text() + " Kec. " + $(
+                    "#kecamatan_id option:selected").text());
             });
         });
-    </script>
-    <script>
-        jQuery(document).ready(function() {
-            jQuery($('#kecamatan_id')).on('change', function() {
-                var KecID = jQuery(this).val();
-                if (KecID) {
-                    jQuery.ajax({
-                        url: '/desa/' + KecID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery($('#desa_id')).empty();
-                            jQuery.each(data, function(key, value) {
-                                $($('#desa_id')).append('<option value="' + key + '">' +
-                                    value + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $($('#desa_id')).empty();
-                }
-            });
-        });
-        jQuery(document).ready(function() {
-            jQuery($('#kec')).on('change', function() {
-                var KecID = jQuery(this).val();
-                if (KecID) {
-                    jQuery.ajax({
-                        url: '/desa/' + KecID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            console.log(data);
-                            jQuery($('#desa')).empty();
-                            jQuery.each(data, function(key, value) {
-                                $($('#desa')).append('<option value="' + key + '">' +
-                                    value + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $($('#desa')).empty();
-                }
-            });
-        });
-    </script>
-    <script>
-        $("input[data-type='currency']").on({
-            keyup: function() {
-                formatCurrency($(this));
-            },
-            blur: function() {
-                formatCurrency($(this), "blur");
-            }
-        });
-
-
-        function formatNumber(n) {
-            // format number 1000000 to 1,234,567
-            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        }
-
-
-        function formatCurrency(input, blur) {
-            // appends $ to value, validates decimal side
-            // and puts cursor back in right position.
-
-            // get input value
-            var input_val = input.val();
-
-            // don't validate empty input
-            if (input_val === "") {
-                return;
-            }
-
-            // original length
-            var original_len = input_val.length;
-
-            // initial caret position 
-            var caret_pos = input.prop("selectionStart");
-
-            // check for decimal
-            if (input_val.indexOf(",") >= 0) {
-
-                // get position of first decimal
-                // this prevents multiple decimals from
-                // being entered
-                var decimal_pos = input_val.indexOf(".");
-
-                // split number by decimal point
-                var left_side = input_val.substring(0, decimal_pos);
-                var right_side = input_val.substring(decimal_pos);
-
-                // add commas to left side of number
-                left_side = formatNumber(left_side);
-
-                // validate right side
-                right_side = formatNumber(right_side);
-
-                // On blur make sure 2 numbers after decimal
-                if (blur === "blur") {
-                    right_side += "00";
-                }
-
-                // Limit decimal to only 2 digits
-                right_side = right_side.substring(0, 2);
-
-                // join number by .
-                input_val = "Rp" + left_side + "." + right_side;
-
-            } else {
-                // no decimal entered
-                // add commas to number
-                // remove all non-digits
-                input_val = formatNumber(input_val);
-                input_val = "Rp" + input_val;
-
-                // final formatting
-                if (blur === "blur") {
-                    input_val += ",00";
-                }
-            }
-
-            // send updated string to input
-            input.val(input_val);
-
-            // put caret back in the right position
-            var updated_len = input_val.length;
-            caret_pos = updated_len - original_len + caret_pos;
-            input[0].setSelectionRange(caret_pos, caret_pos);
-        }
     </script>
 <?php $__env->stopSection(); ?>
 

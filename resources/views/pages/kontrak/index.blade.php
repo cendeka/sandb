@@ -7,21 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatable-extension.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/select2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/sweetalert2.css') }}">
-
-
 @endsection
 
 @section('style')
-    <style>
-        .select2-offscreen,
-        .select2-offscreen:focus {
-            // Keep original element in the same spot
-            // So that HTML5 valiation message appear in the correct position
-            left: auto !important;
-            top: auto !important;
-        }
-
-    </style>
 @endsection
 
 @section('breadcrumb-title')
@@ -115,25 +103,31 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label>Program</label>
-                                <select id="program_id" name="program_id" class="form-control select2 select2-offscreen"
+                                <select id="program_id" name="program_id" class="form-control select"
                                     required style="width: 100%;">
                                     <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
-                                    <optgroup label="Sanitasi">
-                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat</option>
-                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah Terpusat
-                                            Skala Permukiman</option>
+                                    <optgroup label="Pembangunan MCK">
+                                        <option value="1">Pembangunan MCK Komunal</option>
+                                        <option value="2">Pembangunan MCK Skala Individu</option>
                                     </optgroup>
-                                    <optgroup label="Air Minum">
-                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
-                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan</option>
+                                    <optgroup label="SPALD-T">
+                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal
+                                            50 KK
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="SPALD-S">
+                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan
+                                            minimal
+                                            50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pekerjaan_id">Kegiatan</label>
                                 <select id="pekerjaan_id" value="" name="pekerjaan_id"
-                                    class="form-control select2 select2-offscreen pekerjaan" style="width: 100%;" required>
+                                    class="form-control select" style="width: 100%;" required>
                                     <option value="">Pilih Kegiatan</option>
                                 </select>
                             </div>
@@ -188,7 +182,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3" tabindex="0" id="currency">
-                                        <label class="form-label">Nomor Kontrak</label>
+                                        <label class="form-label">Nilai Kontrak</label>
                                         <div class="input-group input-group-flat">
                                             <input type="text" class="form-control" name="pagu" id="pagu"
                                                 data-type="currency" placeholder="Nilai Kontrak" required>
@@ -265,28 +259,31 @@
                             <div class="mb-3">
                                 <label>Program</label>
                                 <select id="program" name="program_id"
-                                    class="form-control select2 select-ubah select2-offscreen" required
+                                    class="form-control select" required
                                     style="width: 100%;">
                                     <option selected disabled value="">Pilih Program</option>
-                                    <optgroup label="Sanitasi">
-                                        <option value="1">Pembangunan/Penyediaan Sub Sistem Pengolahan Setempat</option>
-                                        <option value="2">Pembangunan/Penyediaan Sistem Pengelolaan Air Limbah Terpusat
-                                            Skala Permukiman</option>
+                                    <optgroup label="Pembangunan MCK">
+                                        <option value="1">Pembangunan MCK Komunal</option>
+                                        <option value="2">Pembangunan MCK Skala Individu</option>
                                     </optgroup>
-                                    <optgroup label="Air Minum">
-                                        <option value="3">Pembangunan SPAM Jaringan Perpipaan di Kawasan Perdesaan
+                                    <optgroup label="SPALD-T">
+                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal
+                                            50 KK
                                         </option>
-                                        <option value="4">Perbaikan SPAM Jaringan Perpipaan di Kawasan Perdesaan
-                                        </option>
-                                        <option value="5">Perluasan SPAM Jaringan Perpipaan di Kawasan Perdesaan
-                                        </option>
+                                    </optgroup>
+                                    <optgroup label="SPALD-S">
+                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan
+                                            minimal
+                                            50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pekerjaan_id">Kegiatan</label>
                                 <select id="kegiatan" name="pekerjaan_id"
-                                    class="form-control select2 select-ubah select2-offscreen" style="width: 100%;"
+                                    class="form-control select" style="width: 100%;"
                                     required>
                                     <option value="">Pilih Kegiatan</option>
                                 </select>
@@ -491,11 +488,6 @@
             })
 
         })
-        $('select:not(.normal)').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent()
-            });
-        });
     </script>
     <script>
         jQuery(document).ready(function() {

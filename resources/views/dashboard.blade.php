@@ -9,7 +9,7 @@
 @section('content')
     <div>
         <div class="card-header">
-            <h4>Ringkasan Pekerjaan Bidang Air Minum dan Sanitasi</h4>
+            <h4>Ringkasan Sanitasi</h4>
         </div>
         <div class="card-body">
             <div class="row">

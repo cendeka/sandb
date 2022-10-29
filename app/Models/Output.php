@@ -11,17 +11,7 @@ class Output extends Model
 
     protected $table = 'db_output';
 
-    protected $fillable = ['pekerjaan_id', 'komponen', 'volume', 'satuan'];
-
-    /**
-     * Get the user associated with the Output
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function pekerjaan()
-    {
-        return $this->hasOne(Pekerjaan::class, 'id', 'pekerjaan_id');
-    }
+    protected $fillable = ['pekerjaan_id', 'komponen', 'volume', 'satuan', 'output'];
 
     /**
      * Get all of the comments for the Output

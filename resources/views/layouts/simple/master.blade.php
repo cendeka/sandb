@@ -14,9 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     @include('layouts.simple.css')
+    @vite('resources/js/app.js')
     @yield('style')
   </head>
-  <body @if(Route::current()->getName() == 'index') onload="startTime()" @endif>
+  <body class="" @if(Route::current()->getName() == 'index') onload="startTime()" @endif>
     @if(Route::current()->getName() == 'index') 
       <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>

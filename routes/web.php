@@ -37,6 +37,12 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     //         // etc...
     //     ]
     // ]);
+    Route::resource('wilayah', KecamatanController::class, [
+        'names' => [
+            'index' => 'wilayah',
+            // etc...
+        ],
+    ]);
 
     Route::resource('pekerjaan', PekerjaanController::class, [
         'names' => [
@@ -96,7 +102,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
         ],
     ]);
 
-    Route::resource('rincian', PaketController::class, [
+    Route::resource('rincian', RincianController::class, [
         'names' => [
             'index' => 'rincian',
             'store' => 'rincian.store',
@@ -111,7 +117,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::get('/cover/kontrak/', [App\Http\Controllers\KontrakController::class, 'cover']);
     Route::get('/edit/kontrak/', [App\Http\Controllers\KontrakController::class, 'edit_kontrak']);
-    Route::get('/edit/rincian/', [App\Http\Controllers\PaketController::class, 'edit_paket']);
+    Route::get('/edit/rincian/', [App\Http\Controllers\RincianController::class, 'edit_paket']);
 
     Route::get('/foto/pekerjaan/{pekerjaan}', [App\Http\Controllers\FotoController::class, 'progress']);
     Route::post('/foto/pekerjaan/post', [App\Http\Controllers\FotoController::class, 'storeFoto']);
