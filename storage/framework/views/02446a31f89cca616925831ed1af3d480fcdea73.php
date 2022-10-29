@@ -14,9 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     <?php echo $__env->make('layouts.simple.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
     <?php echo $__env->yieldContent('style'); ?>
   </head>
-  <body <?php if(Route::current()->getName() == 'index'): ?> onload="startTime()" <?php endif; ?>>
+  <body class="" <?php if(Route::current()->getName() == 'index'): ?> onload="startTime()" <?php endif; ?>>
     <?php if(Route::current()->getName() == 'index'): ?> 
       <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>

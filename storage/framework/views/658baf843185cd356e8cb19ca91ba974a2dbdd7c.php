@@ -12,7 +12,7 @@
     <title>Telescope<?php echo e(config('app.name') ? ' - ' . config('app.name') : ''); ?></title>
 
     <!-- Style sheets-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="<?php echo e(asset(mix($cssFile, 'vendor/telescope'))); ?>" rel="stylesheet" type="text/css">
 </head>
 <body>

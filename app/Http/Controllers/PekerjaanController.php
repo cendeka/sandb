@@ -7,7 +7,6 @@ use App\Models\Dokumen;
 use App\Models\Foto;
 use App\Models\Kecamatan;
 use App\Models\Kegiatan;
-use App\Models\Output;
 use App\Models\OutputRealisasi;
 use App\Models\Pekerjaan;
 use App\Models\Tfl;
@@ -23,10 +22,10 @@ class PekerjaanController extends Controller
         $userId = Auth::id();
         if (Auth::user()->roles->first()->name == 'admin') {
             // Admin...
-            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->get();
+            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->latest()->get();
         } else {
             // TFL
-            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->where('user_id', $userId)->get();
+            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->where('user_id', $userId)->latest()->get();
         }
         $realisasi = OutputRealisasi::get();
         foreach ($data as $d) {
@@ -92,7 +91,7 @@ class PekerjaanController extends Controller
     public function kegiatan($id)
     {
         //Air Minum
-        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('program_id', $id)->get();
+        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('program_id', $id)->latest()->get();
         $kec = Kecamatan::get();
         $kegiatan = kegiatan::where('id', $id)->get('detail_kegiatan');
 
@@ -106,16 +105,16 @@ class PekerjaanController extends Controller
     //custom
     public function getPekerjaan($keg_id)
     {
-        $data = Pekerjaan::with('detail', 'paket_pekerjaan')->get()
-        ->where('program_id', $keg_id)->where('detail', null)->whereNotNull('paket_pekerjaan');
+        $data = Pekerjaan::with('detail', 'output')->latest()->get()
+        ->where('program_id', $keg_id)->where('detail', null)->whereNotNull('output');
         // ->pluck('nama_pekerjaan', 'id');
         return response()->json($data);
     }
 
     public function getPaket($keg_id)
     {
-        $data = Pekerjaan::with('paket_pekerjaan')->get()
-        ->where('program_id', $keg_id)->where('paket_pekerjaan', null);
+        $data = Pekerjaan::with('output')->get()
+        ->where('program_id', $keg_id)->where('output', null);
         // ->pluck('nama_pekerjaan', 'id');
 
         return response()->json($data);
@@ -138,7 +137,7 @@ class PekerjaanController extends Controller
         //wtf
         $kec = Kecamatan::get();
 
-        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->get();
+        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->latest()->get();
 
         return view('pages.pekerjaan.index', [
             'title' => 'Database Sanitasi',
@@ -150,7 +149,7 @@ class PekerjaanController extends Controller
     public function pekerjaan($tahun)
     {
         //wtf
-        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('tahun_anggaran', $tahun)->get();
+        $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('tahun_anggaran', $tahun)->latest()->get();
         // dd($data);
         return view('halaman.pekerjaan.index', [
             'data' => $data,
@@ -183,7 +182,7 @@ class PekerjaanController extends Controller
     {
         $rules = [
             'program_id' => 'required',
-            'nama_pekerjaan' => 'required|unique:db_pekerjaan,nama_pekerjaan',
+            'nama_pekerjaan' => 'required|unique:db_pekerjaan,nama_pekerjaan,'.$request->id.',id,tahun_anggaran,'.$request->tahun_anggaran,
             'kecamatan_id' => 'required',
             'desa_id' => 'required',
             'pagu' => 'required',
@@ -193,6 +192,8 @@ class PekerjaanController extends Controller
 
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
+            'unique' => 'Pekerjaan sama di tahun anggaran yang sama',
+
         ];
 
         $attributeNames = [
@@ -217,7 +218,7 @@ class PekerjaanController extends Controller
         ]);
         Alert::success('Kegiatan', 'Data Kegiatan Berhasil Ditambahkan');
 
-        return redirect('pekerjaan');
+        return redirect()->back();
     }
 
     /**
@@ -229,11 +230,10 @@ class PekerjaanController extends Controller
     public function show(Pekerjaan $pekerjaan)
     {
         //
-        $pekerjaan = Pekerjaan::with('kec', 'desa', 'kegiatan', 'detail', 'detail.realisasi', 'dokumen')->where('id', $pekerjaan->id)->first();
+        $pekerjaan = Pekerjaan::with('kec', 'desa', 'kegiatan', 'detail', 'detail.realisasi', 'dokumen', 'output')->where('id', $pekerjaan->id)->first();
         $pekerjaan_id = $pekerjaan->id;
         $foto = Foto::where('pekerjaan_id', $pekerjaan_id)->get();
         $dokumen = Dokumen::where('pekerjaan_id', $pekerjaan_id)->get();
-        $output = Output::where('pekerjaan_id', $pekerjaan_id)->get();
 
         if (! is_null($pekerjaan->detail)) {
             // code...
@@ -247,7 +247,6 @@ class PekerjaanController extends Controller
                 'foto' => $foto,
                 'dokumen' => $dokumen,
                 'days' => $days,
-                'output' => $output,
 
             ]);
         } else {
@@ -256,7 +255,6 @@ class PekerjaanController extends Controller
                 'title' => $pekerjaan->nama_pekerjaan,
                 'foto' => $foto,
                 'dokumen' => $dokumen,
-                'output' => $output,
                 // 'days' => $days,
             ]);
         }
@@ -288,7 +286,7 @@ class PekerjaanController extends Controller
     {
         $rules = [
             'program_id' => 'required',
-            'nama_pekerjaan' => 'required',
+            'nama_pekerjaan' => 'required|unique:db_pekerjaan,nama_pekerjaan,'.$request->id.',id,tahun_anggaran,'.$request->tahun_anggaran,
             'kecamatan_id' => 'required',
             'desa_id' => 'required',
             'pagu' => 'required',
@@ -297,6 +295,8 @@ class PekerjaanController extends Controller
 
         $customMessages = [
             'required' => ':attribute tidak boleh kosong ',
+            'unique' => 'Pekerjaan sama di tahun anggaran yang sama',
+
         ];
 
         $attributeNames = [

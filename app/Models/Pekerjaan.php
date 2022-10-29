@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-
 class Pekerjaan extends Model
 {
     use HasFactory;
@@ -90,16 +88,6 @@ class Pekerjaan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function output()
-    {
-        return $this->hasMany(Output::class, 'pekerjaan_id', 'id');
-    }
-
-    /**
-     * Get all of the comments for the Pekerjaan
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function realisasi_output()
     {
         return $this->hasMany(OutputRealisasi::class, 'pekerjaan_id', 'id');
@@ -110,9 +98,9 @@ class Pekerjaan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function paket_pekerjaan()
+    public function output()
     {
-        return $this->hasOne(Paket::class, 'pekerjaan_id', 'id');
+        return $this->hasOne(Rincian::class, 'pekerjaan_id', 'id');
     }
 
     public static function boot()

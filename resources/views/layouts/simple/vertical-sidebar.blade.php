@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
 	<div>
 		<div class="logo-wrapper">
-			<a href="{{route('/')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
+			<a href="{{route('/')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" style="height: 50px;" alt=""></a>
 			<div class="back-btn"><i class="fa fa-angle-left"></i></div>
 			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
 		</div>

@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
 	<div>
 		<div class="logo-wrapper">
-			<a href="{{route('/')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" style="height: 50px;" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo.png')}}" alt=""></a>
+			<a href="{{route('/')}}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" style="height: 50px;" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo.png')}}" style="height: 50px;" alt=""></a>
 			<div class="back-btn"><i class="fa fa-angle-left"></i></div>
 			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
 		</div>
@@ -46,6 +46,9 @@
 						</ul>
 					</li>
 					@endrole
+					<li class="sidebar-list">
+						<a class="sidebar-link sidebar-title {{Route::currentRouteName()=='wilayah' ? 'active' : ''  }}" href="/wilayah"><i data-feather="layers"></i><span class="lan-3">Data Wilayah</span></a>
+					</li>
 					<li class="sidebar-list">
 						<a class="sidebar-link sidebar-title {{Route::currentRouteName()=='tfl' ? 'active' : ''  }}" href="/tfl"><i data-feather="layers"></i><span class="lan-3">Sanitasi DAK</span></a>
 					</li>

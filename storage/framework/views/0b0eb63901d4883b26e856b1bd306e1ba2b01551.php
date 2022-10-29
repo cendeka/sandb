@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
 	<div>
 		<div class="logo-wrapper">
-			<a href="<?php echo e(route('/')); ?>"><img class="img-fluid for-light" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" style="height: 50px;" alt=""><img class="img-fluid for-dark" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" alt=""></a>
+			<a href="<?php echo e(route('/')); ?>"><img class="img-fluid for-light" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" style="height: 50px;" alt=""><img class="img-fluid for-dark" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" style="height: 50px;" alt=""></a>
 			<div class="back-btn"><i class="fa fa-angle-left"></i></div>
 			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
 		</div>
@@ -46,6 +46,9 @@
 						</ul>
 					</li>
 					<?php endif; ?>
+					<li class="sidebar-list">
+						<a class="sidebar-link sidebar-title <?php echo e(Route::currentRouteName()=='wilayah' ? 'active' : ''); ?>" href="/wilayah"><i data-feather="layers"></i><span class="lan-3">Data Wilayah</span></a>
+					</li>
 					<li class="sidebar-list">
 						<a class="sidebar-link sidebar-title <?php echo e(Route::currentRouteName()=='tfl' ? 'active' : ''); ?>" href="/tfl"><i data-feather="layers"></i><span class="lan-3">Sanitasi DAK</span></a>
 					</li>
