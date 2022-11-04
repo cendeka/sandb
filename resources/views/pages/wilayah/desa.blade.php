@@ -26,7 +26,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h6></h6>
+                        <h6>Kecamatan {{$kecamatan}}</h6>
                     </div>
                     <div class="card-body">
                         <div class="dt-ext table-responsive">
@@ -34,8 +34,9 @@
                                 <thead>
                                     <tr>
                                         <th style="width:20%">No</th>
-                                        <th>Kecamatan</th>
-                                        <th>Jumlah Desa</th>
+                                        <th>Desa</th>
+                                        <th>Luas Wilayah</th>
+                                        <th>Jumlah Penduduk</th>
                                         <th>Sarana Terbangun</th>
                                     </tr>
                                 </thead>
@@ -46,10 +47,10 @@
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $item->n_kec }}</td>
-                                            <td>{{$item->desa->count()}}</td>
-                                            <td>{{$item->kegiatan}}</td>
-
+                                            <td>{{ $item->n_desa }}</td>
+                                            <td>{{$item->luas}} m2</td>
+                                            <td>{{$item->jumlah_penduduk}} Jiwa</td>
+                                            <td>{{$item->kegiatan->count()}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

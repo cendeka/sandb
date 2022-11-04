@@ -16,7 +16,7 @@ class KecamatanController extends Controller
     {
         //
         $data = Kecamatan::with('desa','kegiatan','kegiatan.output')->get();
-        return view('pages.wilayah.index', compact('data'), [
+        return view('pages.wilayah.kec', compact('data'), [
             'title' => "Data Wilayah",
 
         ]);

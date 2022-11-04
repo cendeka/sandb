@@ -47,10 +47,12 @@
 					</li>
 					@endrole
 					<li class="sidebar-list">
-						<a class="sidebar-link sidebar-title {{Route::currentRouteName()=='wilayah' ? 'active' : ''  }}" href="/wilayah"><i data-feather="layers"></i><span class="lan-3">Data Wilayah</span></a>
-					</li>
-					<li class="sidebar-list">
-						<a class="sidebar-link sidebar-title {{Route::currentRouteName()=='tfl' ? 'active' : ''  }}" href="/tfl"><i data-feather="layers"></i><span class="lan-3">Sanitasi DAK</span></a>
+						<a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/wilayah' ? 'active' : '' }}" href="#"><i data-feather="airplay"></i><span class="lan-6">Data Wilayah</span>
+							<div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/wilayah' ? 'down' : 'right' }}"></i></div>
+						</a>
+						<ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/wilayah' ? 'block;' : 'none;' }}">
+							<li><a href="/wilayah/kecamatan" class="{{ request()->route()->getPrefix()=='wilayah' ? 'active' : '' }}">Kecamatan</a></li>
+						</ul>
 					</li>
 					<li class="sidebar-main-title">
 						<div>
