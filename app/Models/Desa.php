@@ -12,12 +12,22 @@ class Desa extends Model
     protected $table = 'db_desa';
 
     /**
-     * Get the user associated with the Desa
+     * Get the kec associated with the Desa
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function kec()
     {
-        return $this->hasOne(Kecamatan::class, 'kec_id', 'id');
+        return $this->hasOne(Kecamatan::class, 'id', 'kec_id');
+    }
+
+    /**
+     * Get all of the kegiatan for the Desa
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function kegiatan()
+    {
+        return $this->hasMany(Pekerjaan::class, 'desa_id', 'id');
     }
 }

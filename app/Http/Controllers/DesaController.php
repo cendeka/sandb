@@ -22,9 +22,19 @@ class DesaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Desa::with('kec','kegiatan')->where('kec_id',$request->id)->get();
+        foreach ($data as $key => $value) {
+            # code...
+           $kecamatan = $value->kec->n_kec;
+        }
+        return view('pages.wilayah.desa',[
+            'title' => 'Database Sanitasi',
+            'data' => $data,
+            'kecamatan' => $kecamatan
+
+        ]);
     }
 
     /**

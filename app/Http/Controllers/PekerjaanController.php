@@ -16,81 +16,8 @@ use Illuminate\Http\Request;
 
 class PekerjaanController extends Controller
 {
-    public function tfl_index()
-    {
-        //Get User ID
-        $userId = Auth::id();
-        if (Auth::user()->roles->first()->name == 'admin') {
-            // Admin...
-            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->latest()->get();
-        } else {
-            // TFL
-            $data = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->where('user_id', $userId)->latest()->get();
-        }
-        $realisasi = OutputRealisasi::get();
-        foreach ($data as $d) {
-            return view('pages.tfl.home', [
-                'data' => $data,
-                'title' => 'Sanitasi DAK',
-                'realisasi_output' => $d->pekerjaan->realisasi_output,
-                'realisasi' => $realisasi,
-            ]);
-        }
-    }
-
-    public function tfl_show($pekerjaan)
-    {
-        $userId = Auth::id();
-
-        if (Auth::user()->roles->first()->name == 'admin') {
-            // Role Admin
-            $tfl = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->where('pekerjaan_id', $pekerjaan)->first();
-        } else {
-            // Role TFL
-            $tfl = Tfl::with('pekerjaan.kegiatan', 'pekerjaan.output', 'pekerjaan.realisasi_output')->where('user_id', $userId)
-            ->where('pekerjaan_id', $pekerjaan)->first();
-        }
-        $pekerjaan_id = $pekerjaan;
-        $foto = Foto::where('pekerjaan_id', $pekerjaan_id)->get();
-        $dokumen = Dokumen::where('pekerjaan_id', $pekerjaan_id)->get();
-        if (empty($tfl)) {
-            return redirect(url('/tfl'));
-        } else {
-            if (! is_null($tfl->pekerjaan->detail)) {
-                // code...
-                $mulai = new DateTime($tfl->pekerjaan->detail->tgl_mulai);
-                $selesai = new DateTime($tfl->pekerjaan->detail->tgl_selesai);
-                $interval = $mulai->diff($selesai);
-                $days = $interval->format('%a').' Hari Kalender';
-
-                return view('pages.tfl.info', compact('pekerjaan'), [
-                    'title' => $tfl->pekerjaan->nama_pekerjaan,
-                    'foto' => $foto,
-                    'dokumen' => $dokumen,
-                    'days' => $days,
-                    'pagu' => $tfl->pekerjaan->pagu,
-                    'tfl' => $tfl,
-
-                ]);
-            } else {
-                // code...
-                return view('pages.tfl.info', compact('pekerjaan'), [
-                    'title' => $tfl->pekerjaan->nama_pekerjaan,
-                    'foto' => $foto,
-                    'dokumen' => $dokumen,
-                    'pagu' => $tfl->pekerjaan->pagu,
-                    'tfl' => $tfl,
-
-                    // 'days' => $days,
-
-                ]);
-            }
-        }
-    }
-
     public function kegiatan($id)
     {
-        //Air Minum
         $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->where('program_id', $id)->latest()->get();
         $kec = Kecamatan::get();
         $kegiatan = kegiatan::where('id', $id)->get('detail_kegiatan');
@@ -134,9 +61,7 @@ class PekerjaanController extends Controller
      */
     public function index()
     {
-        //wtf
         $kec = Kecamatan::get();
-
         $data = Pekerjaan::with('kegiatan', 'desa', 'kec')->latest()->get();
 
         return view('pages.pekerjaan.index', [

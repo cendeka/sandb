@@ -37,12 +37,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     //         // etc...
     //     ]
     // ]);
-    Route::resource('wilayah', KecamatanController::class, [
-        'names' => [
-            'index' => 'wilayah',
-            // etc...
-        ],
-    ]);
+
 
     Route::resource('pekerjaan', PekerjaanController::class, [
         'names' => [
@@ -124,6 +119,8 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
 
+    Route::get('/wilayah/kecamatan', [App\Http\Controllers\KecamatanController::class, 'index']);
+    Route::get('/wilayah/desa', [App\Http\Controllers\DesaController::class, 'index']);
     Route::get('/desa/{kec_id}', [App\Http\Controllers\DesaController::class, 'getdesa']);
     Route::get('/pekerjaan/kegiatan/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPekerjaan']);
     Route::get('/pekerjaan/kegiatan/rincian/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPaket']);
@@ -132,21 +129,10 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     Route::get('/edit/pekerjaan/', [App\Http\Controllers\PekerjaanController::class, 'ubahPekerjaan']);
 
     //V1.2
-    //TFL
-    //Air Minum
     Route::get('/kegiatan', [App\Http\Controllers\PekerjaanController::class, 'index']);
     Route::get('/kegiatan/{id}', [App\Http\Controllers\PekerjaanController::class, 'kegiatan'])->name('kegiatan');
 
     Route::get('/dok/tambah', [App\Http\Controllers\DokumenController::class, 'create']);
-});
-Route::group(['middleware' => ['auth', 'role:admin|tfl']], function () {
-    Route::get('/tfl', [App\Http\Controllers\PekerjaanController::class, 'tfl_index'])->name('tfl');
-    Route::get('/sanitasi/dak/{pekerjaan}', [App\Http\Controllers\PekerjaanController::class, 'tfl_show']);
-    Route::post('/realisasi/output/', [App\Http\Controllers\OutputRealisasiController::class, 'store'])->name('realisasi.output');
-    Route::post('/foto/upload/', [App\Http\Controllers\FotoController::class, 'store'])->name('foto.store');
-    Route::delete('foto/hapus/{foto}', [App\Http\Controllers\FotoController::class, 'destroy'])->name('foto.hapus');
-    Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
-    Route::post('/dok/post', [App\Http\Controllers\DokumenController::class, 'store'])->name('dokumen.post');
 });
 
 require __DIR__.'/auth.php';
