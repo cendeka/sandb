@@ -2,6 +2,7 @@
 /public/hot
 /public/build
 /public/storage
+/public/storage/framework/views
 /storage/*.key
 /vendor
 .env
