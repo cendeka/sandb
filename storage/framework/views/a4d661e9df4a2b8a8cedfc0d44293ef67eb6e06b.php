@@ -1,1 +1,0 @@
-<?php echo e($data); ?><?php /**PATH /Users/ilhamtaufiq/www/ams/resources/views/pages/tfl/tes.blade.php ENDPATH**/ ?>
