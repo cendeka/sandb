@@ -28,6 +28,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Tahun Anggaran 2022</h5>
+                        <span><label class="badge badge-warning">Perhatian!</label> Pastikan menambahkan <a href="/rincian">Rincian Kegiatan</a> terlebih dahulu sebelum menambahkan Data Kontrak</span>
                         <div class="card-header-right">
                             <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#modal-kontrak"
                                 data-bs-original-title="" title=""> <span class="fa fa-edit"></span>

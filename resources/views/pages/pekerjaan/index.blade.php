@@ -45,7 +45,6 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Program</th>
                                         <th>Kegiatan</th>
                                         <th>Pagu</th>
                                         <th>Tahun Anggaran</th>
@@ -64,21 +63,25 @@
                                         @endphp
                                         <tr>
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $item->kegiatan->sub_kegiatan }}</td>
                                             <td><a href="/pekerjaan/{{ $item->id }}">{{ $item->nama_pekerjaan }}</a>
                                             </td>
                                             <td>{{ $pagu }}</td>
                                             <td>{{ $item->tahun_anggaran }}</td>
-                                            <td>{{$item->sumber_dana}}</td>
+                                            <td>{{ $item->sumber_dana }}</td>
                                             <td>
-                                                <div class="card-body btn-showcase">
-                                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-hapus{{ $item->id }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                    <button class="btn btn-warning btn-edit" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-ubah" id="edit-item"
-                                                        data-id="{{ $item->id }}" data-id="{{ $item->id }}"><i
-                                                            class="fa fa-edit"></i></button>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button class="btn btn-danger btn-xs" data-bs-toggle="modal"
+                                                            data-bs-target="#modal-hapus{{ $item->id }}"
+                                                            type="button"><i class="fa fa-trash"></i></button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button class="btn btn-warning btn-edit btn-xs"
+                                                            data-bs-toggle="modal" data-bs-target="#modal-ubah"
+                                                            type="button" id="edit-item" data-id="{{ $item->id }}"
+                                                            data-id="{{ $item->id }}"><i
+                                                                class="fa fa-edit"></i></button>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -116,11 +119,13 @@
                                         </optgroup>
                                         <optgroup label="SPALD-T">
                                             <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                            <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                            <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal
+                                                50 KK</option>
                                         </optgroup>
                                         <optgroup label="SPALD-S">
                                             <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                            <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
+                                            <option value="6">Pembangunan tangki septik skala individual perdesaan
+                                                minimal 50 KK </option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -202,12 +207,13 @@
         </div>
     </div>
     @foreach ($data as $d)
-        <div class="modal fade bd-example-modal-lg" id="modal-hapus{{ $d->id }}" role="dialog" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="modal-hapus{{ $d->id }}" role="dialog"
+            aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-status bg-danger"></div>
-                    <div class="modal-body text-center py-4">                       
+                    <div class="modal-body text-center py-4">
                         <h3>Apakah anda yakin?</h3>
                         <div class="text-muted">Hapus Data Kontrak Kegiatan {{ $d->nama_pekerjaan }}</div>
                     </div>
@@ -256,11 +262,13 @@
                                     </optgroup>
                                     <optgroup label="SPALD-T">
                                         <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50
+                                            KK</option>
                                     </optgroup>
                                     <optgroup label="SPALD-S">
                                         <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
+                                            50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -413,7 +421,8 @@
                             jQuery.each(data, function(key, value) {
                                 function populate(selector) {
                                     $(selector)
-                                    .append('<option value="' + key + '">' + value +'</option>')
+                                        .append('<option value="' + key + '">' + value +
+                                            '</option>')
                                 }
                                 populate('#desa_id,#desa');
                             });
@@ -492,8 +501,6 @@
                     },
                 ]
             });
-            $('#example1_filter input').addClass('form-control form-control-sm'); // <-- add this line
-            $('#example1_filter label').addClass('text-muted'); // <-- add this line
         });
     </script>
     <script>
