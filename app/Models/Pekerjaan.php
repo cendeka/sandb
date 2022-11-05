@@ -11,7 +11,7 @@ class Pekerjaan extends Model
 
     protected $table = 'db_pekerjaan';
 
-    protected $fillable = ['program_id', 'nama_pekerjaan', 'desa_id', 'kecamatan_id', 'pagu', 'tahun_anggaran'];
+    protected $fillable = ['id','program_id', 'nama_pekerjaan', 'desa_id', 'kecamatan_id', 'pagu', 'tahun_anggaran', 'sumber_dana'];
 
     /**
      * Get the user associated with the Pekerjaan

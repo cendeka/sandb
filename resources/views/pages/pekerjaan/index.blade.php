@@ -49,6 +49,7 @@
                                         <th>Kegiatan</th>
                                         <th>Pagu</th>
                                         <th>Tahun Anggaran</th>
+                                        <th>Sumber Dana</th>
                                         <th>Opsi</th>
                                     </tr>
                                 </thead>
@@ -68,6 +69,7 @@
                                             </td>
                                             <td>{{ $pagu }}</td>
                                             <td>{{ $item->tahun_anggaran }}</td>
+                                            <td>{{$item->sumber_dana}}</td>
                                             <td>
                                                 <div class="card-body btn-showcase">
                                                     <button class="btn btn-danger" data-bs-toggle="modal"
@@ -156,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-8 mb-3">
+                                <div class="col-lg-4 mb-3">
                                     <div>
                                         <label for="Pagu">Pagu</label>
                                         <input class="form-control input-mask" name="pagu" required>
@@ -174,6 +176,17 @@
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
                                             <option value="2016">2016</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div>
+                                        <label for="">Sumber Dana</label>
+                                        <select name="sumber_dana" class="form-control select2" required>
+                                            <option value="" selected>Pilih Sumber Dana</option>
+                                            <option value="APBD">APBD</option>
+                                            <option value="APBN">APBN</option>
+                                            <option value="DAK">DAK</option>
                                         </select>
                                     </div>
                                 </div>
@@ -231,6 +244,7 @@
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
+                            <input name="pekerjaan_id" type="text" id="pekerjaan_id" value="">
                             <div class="mb-3">
                                 <label>Program</label>
                                 <select id="program" name="program_id" class="form-control select2 select-ubah"
@@ -246,8 +260,7 @@
                                     </optgroup>
                                     <optgroup label="SPALD-S">
                                         <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
-                                            50 KK </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -280,7 +293,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-8 mb-3">
+                                <div class="col-lg-4 mb-3">
                                     <div>
                                         <label for="Pagu">Pagu</label>
                                         <input id="n_pagu" class="form-control input-mask" name="pagu"
@@ -300,6 +313,17 @@
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
                                             <option value="2016">2016</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div>
+                                        <label for="">Sumber Dana</label>
+                                        <select name="sumber_dana" id="sumber_dana" class="form-control" required>
+                                            <option value="" selected>Pilih Sumber Dana</option>
+                                            <option value="APBD">APBD</option>
+                                            <option value="APBN">APBN</option>
+                                            <option value="DAK">DAK</option>
                                         </select>
                                     </div>
                                 </div>
@@ -413,9 +437,11 @@
                 dataType: 'json',
                 success: function(res) {
                     $('form').attr('action', "{{ url('pekerjaan') }}/" + res.id);
+                    $('#pekerjaan_id').val(res.id);
                     $('#pekerjaan').val(res.nama_pekerjaan);
                     $('#n_pagu').val(res.pagu);
                     $('#ta').val(res.tahun_anggaran);
+                    $('#sumber_dana').val(res.sumber_dana);
                     var $1 = $("<option selected='selected'></option>").val(res.program_id)
                         .text(res.kegiatan.sub_kegiatan);
                     $("#program").append($1);
