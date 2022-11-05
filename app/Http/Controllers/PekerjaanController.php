@@ -112,6 +112,8 @@ class PekerjaanController extends Controller
             'desa_id' => 'required',
             'pagu' => 'required',
             'tahun_anggaran' => 'required',
+            'sumber_dana' => 'required',
+
 
         ];
 
@@ -128,7 +130,7 @@ class PekerjaanController extends Controller
             'desa_id' => 'Desa',
             'pagu' => 'Pagu',
             'tahun_anggaran' => 'Tahun Anggaran',
-
+            'sumber_dana' => 'Sumber Dana',
         ];
 
         $this->validate($request, $rules, $customMessages, $attributeNames);
@@ -140,6 +142,7 @@ class PekerjaanController extends Controller
             'desa_id' => $request->desa_id,
             'pagu' => str_replace($string, '', $request->pagu),
             'tahun_anggaran' => $request->tahun_anggaran,
+            'sumber_dana' => $request->sumber_dana,
         ]);
         Alert::success('Kegiatan', 'Data Kegiatan Berhasil Ditambahkan');
 
@@ -211,11 +214,12 @@ class PekerjaanController extends Controller
     {
         $rules = [
             'program_id' => 'required',
-            'nama_pekerjaan' => 'required|unique:db_pekerjaan,nama_pekerjaan,'.$request->id.',id,tahun_anggaran,'.$request->tahun_anggaran,
+            'nama_pekerjaan' => 'required',
             'kecamatan_id' => 'required',
             'desa_id' => 'required',
             'pagu' => 'required',
             'tahun_anggaran' => 'required',
+            'sumber_dana' => 'required'
         ];
 
         $customMessages = [
@@ -231,22 +235,28 @@ class PekerjaanController extends Controller
             'desa_id' => 'Desa',
             'pagu' => 'Pagu',
             'tahun_anggaran' => 'Tahun Anggaran',
+            'sumber_dana' => 'Sumber Dana'
         ];
 
         $this->validate($request, $rules, $customMessages, $attributeNames);
         $string = ['Rp', ',00', '.'];
 
-        $pekerjaan->update([
+        $pekerjaan->updateOrCreate(
+        [
+            'id' => $request->pekerjaan_id
+        ],
+        [
             'program_id' => $request->program_id,
             'nama_pekerjaan' => $request->nama_pekerjaan,
             'kecamatan_id' => $request->kecamatan_id,
             'desa_id' => $request->desa_id,
             'pagu' => str_replace($string, '', $request->pagu),
             'tahun_anggaran' => $request->tahun_anggaran,
+            'sumber_dana' => $request->sumber_dana
         ]);
 
-        return redirect()->route('pekerjaan')->with('pesan', 'Data Pekerjaan Berhasil Diubah');
-    }
+        Alert::success('Kegiatan', 'Data Kegiatan Berhasil Diubah');
+        return redirect()->back();    }
 
     /**
      * Remove the specified resource from storage.

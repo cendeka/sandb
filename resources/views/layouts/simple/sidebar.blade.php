@@ -26,12 +26,20 @@
 							<div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/pekerjaan' ? 'down' : 'right' }}"></i></div>
 						</a>
 						<ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/pekerjaan' ? 'block;' : 'none;' }}">
-							<li><a href="/kegiatan/1" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">MCK Komunal</a></li>
-							<li><a href="/kegiatan/2" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">MCK Skala Individu</a></li>
-							<li><a href="/kegiatan/3" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">IPAL</a></li>
-							<li><a href="/kegiatan/4" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">IPAL Kombinasi MCK</a></li>
-							<li><a href="/kegiatan/5" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Tangki Septik Komunal</a></li>
-							<li><a href="/kegiatan/6" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">Tangki Septik Individu</a></li>
+							<li><a href="/pekerjaan" class="">Semua Kegiatan</a></li>							
+							<li>
+								<a class="submenu-title " href="#">Sub Kegiatan
+									<div class="according-menu"><i class="fa fa-angle-right"></i></div>
+								</a>
+								<ul class="nav-sub-childmenu submenu-content" style="display: none;;">
+									<li><a href="/kegiatan/1" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">MCK Komunal</a></li>
+									<li><a href="/kegiatan/2" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">MCK Individu</a></li>
+									<li><a href="/kegiatan/3" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">IPAL</a></li>
+									<li><a href="/kegiatan/4" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">IPAL + MCK</a></li>
+									<li><a href="/kegiatan/5" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">TS Komunal</a></li>
+									<li><a href="/kegiatan/6" class="{{ request()->route()->getPrefix()=='kegiatan' ? 'active' : '' }}">TS Individu</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<li class="sidebar-list">
@@ -51,7 +59,7 @@
 							<div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/wilayah' ? 'down' : 'right' }}"></i></div>
 						</a>
 						<ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/wilayah' ? 'block;' : 'none;' }}">
-							<li><a href="/wilayah/kecamatan" class="{{ request()->route()->getPrefix()=='wilayah' ? 'active' : '' }}">Kecamatan</a></li>
+							<li><a href="/wilayah/kecamatan" class="{{ request()->route()->getPrefix()=='/wilayah' ? 'active' : '' }}">Kecamatan</a></li>
 						</ul>
 					</li>
 					<li class="sidebar-main-title">
