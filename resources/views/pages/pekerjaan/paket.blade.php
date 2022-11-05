@@ -60,7 +60,7 @@
                                                 <label
                                                     class="badge badge-success">{{ $item->aspirasi == 1 ? 'Aspirasi' : '' }}</label>
                                             </td>
-                                            <td>{{$item->outcome}} Jiwa</td>
+                                            <td>{{ $item->outcome }} Jiwa</td>
                                             <td>
                                                 @if ($item->output != null)
                                                     @foreach ($item->output as $p)
@@ -71,16 +71,17 @@
                                                     <p>Belum Diinput</p>
                                                 @endif
                                             </td>
-
-
                                             <td>
-                                                <div class="card-body btn-showcase">
-                                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-hapus{{ $item->id }}"><i
-                                                            class="fa fa-trash"></i></button>
-                                                    <button class="btn btn-warning btn-edit" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-ubah" id="edit-item"
-                                                        data-id="{{ $item->id }}"><i class="fa fa-edit"></i></button>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#modal-hapus{{ $item->id }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button class="btn btn-warning btn-edit" data-bs-toggle="modal"
+                                                            data-bs-target="#modal-ubah{{ $item->id }}"> <i class="fa fa-edit"></i></button>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -208,7 +209,8 @@
             </div>
         </div>
     @endforeach
-    <div class="modal fade bd-example-modal-lg" id="modal-ubah" role="dialog" tabindex="-1"
+    @foreach ($data as $d)
+    <div class="modal fade bd-example-modal-lg" id="modal-ubah{{$d->id}}" role="dialog" tabindex="-1"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="modal-content-ubah">
@@ -217,101 +219,63 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-ubah">
-                    <form class="needs-validation" novalidate="" action="" method="POST">
+                    <form class="needs-validation" novalidate="" action="{{route('rincian.store')}}" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="modal-body">
+                            <input type="text" value="{{$d->id}}" name="id" id="rincianID" hidden>
                             <div class="mb-3">
                                 <label>Program</label>
                                 <select id="program" name="program_id"
                                     class="form-control select2 select2-offscreen selek" required style="width: 100%;">
-                                    <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
-                                    <optgroup label="Pembangunan MCK">
-                                        <option value="1">Pembangunan MCK Komunal</option>
-                                        <option value="2">Pembangunan MCK Skala Individu</option>
-                                    </optgroup>
-                                    <optgroup label="SPALD-T">
-                                        <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50
-                                            KK
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="SPALD-S">
-                                        <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal
-                                            50 KK </option>
-                                    </optgroup>
+                                    @foreach ($program as $item)
+                                        <option value="{{ $item->id }}" {{$d->pekerjaan->program_id == $item->id  ? 'selected' : ''}}>{{$item->detail_kegiatan}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pekerjaan_id">Kegiatan</label>
                                 <select id="kegiatan" value="" name="pekerjaan_id"
-                                    class="form-control select2 select2-offscreen selek" style="width: 100%;" required>
-                                    <option value="">Pilih Kegiatan</option>
+                                    class="form-control" required>
+                                    <option value="{{$d->pekerjaan->id}}">{{$d->pekerjaan->nama_pekerjaan}}</option>
                                 </select>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div>
-                                        <label class="form-label">Nama Pelaksana</label>
-                                        <input id="pelaksana" name="nama_pelaksana" type="text" class="form-control"
-                                            required="">
-                                        <div class="invalid-feedback"><a class="text-danger">Nomor SPK Invalid!</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div>
-                                        <label class="form-label">Data Pelaksana</label>
+                                        <label class="form-label">Target Outcome</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Alamat</label>
-                                        <input id="alamat" name="alamat_pelaksana" type="text"
-                                            class="form-control" required="">
+                                        <input id="outcome" type="number" value="{{$d->outcome}}" name="outcome" class="form-control" placeholder="Jiwa">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">NPWP</label>
-                                        <input id="npwp" name="npwp_pelaksana" type="text" class="form-control"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="media mb-2">
-                                        <label class="col-form-label m-r-10">Aspirasi</label>
-                                        <div class="media-body text-end icon-state switch-outline">
-                                            <label class="switch">
-                                                <input name="aspirasi" id="aspirasi" type="checkbox"
-                                                    value="1"><span class="switch-state bg-primary"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Tahap Pelaksanaan</label>
-                                        <select class="form-controle" name="tahap" id="tahap_pelaksanaan">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <label class="form-label">Target Output</label> <br><button type="button" name="add" id="update-output"
+                                        class="btn btn-outline-primary">Tambah</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="mb-3" tabindex="0" id="currency">
-                                        <label class="form-label">Keterangan</label>
-                                        <div class="input-group input-group-flat">
-                                            <textarea id="keterangan" class="form-control" name="keterangan" id=""></textarea>
-                                        </div>
-                                    </div>
+                                    <table class="table" id="komponen">
+                                            @foreach ($d->output as $item)
+                                            <tr>
+                                                <td><input type="text" name="output[0][komponen]" class="form-control"
+                                                        placeholder="Komponen" value="{{$item['komponen']}}"></td>
+                                                <td><input type="number" name="output[0][volume]" class="form-control"
+                                                        placeholder="Volume" value="{{$item['volume']}}"></td>
+                                                <td><input type="text" name="output[0][satuan]" class="form-control"
+                                                        placeholder="Satuan" value="{{$item['satuan']}}"></td>
+                                                        <td><button type="button"
+                                                        class="btn btn-outline-danger remove-output-field">Hapus</button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -324,6 +288,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 @endsection
 
 @section('script')
@@ -362,34 +327,6 @@
         @endif
     </script>
     <script>
-        $(document).on('click', '.btn-edit', function() {
-            var id = $(this).data('id');
-            console.log(id);
-
-            $.ajax({
-                type: "GET",
-                url: "{{ url('edit/rincian') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('form').attr('action', 'rincian/' + res.id);
-                    $('#pelaksana').val(res.nama_pelaksana);
-                    $('#npwp').val(res.npwp_pelaksana);
-                    $('#alamat').val(res.alamat_pelaksana);
-                    $('#aspirasi').prop('checked', res.aspirasi);
-                    $('#tahap_pelaksanaan').val(res.tahap);
-                    $('#keterangan').val(res.keterangan);
-                    $("#program").val(res.pekerjaan.kegiatan.id);
-                    var $newOption = $("<option selected='selected'></option>").val(res.pekerjaan.id)
-                        .text(res.pekerjaan.nama_pekerjaan)
-                    $("#kegiatan").append($newOption);
-                }
-            });
-        })
-    </script>
-    <script>
         $(document).ready(function() {
             $('#example1').DataTable({
                 dom: 'Bfrtip',
@@ -426,8 +363,6 @@
                     },
                 ]
             });
-            $('#example1_filter input').addClass('form-control form-control-sm'); // <-- add this line
-            $('#example1_filter label').addClass('text-muted'); // <-- add this line
         });
     </script>
     <script>
@@ -457,20 +392,20 @@
         });
     </script>
     <script>
-        $("#tambah-output").click(function() {
+        $("#tambah-output, #update-output").click(function() {
             var i = 0;
             ++i;
             var a = '<tr>' +
-                ' <td><input type="text" name="output['+i+'][komponen]" class="form-control"' +
+                ' <td><input type="text" name="output[' + i + '][komponen]" class="form-control"' +
                 'placeholder="Komponen"></td>' +
-                '<td><input type="number" name="output['+i+'][volume]" class="form-control"' +
+                '<td><input type="number" name="output[' + i + '][volume]" class="form-control"' +
                 'placeholder="Volume"></td>' +
-                '<td><input type="text" name="output['+i+'][satuan]" class="form-control"' +
+                '<td><input type="text" name="output[' + i + '][satuan]" class="form-control"' +
                 'placeholder="Satuan"></td>' +
                 '<td><button type="button" name="add"' +
                 'class="btn btn-outline-danger remove-output-field">Hapus</button></td>' +
                 '</tr>'
-            $("#divOutput").append(a);
+            $("#divOutput, #komponen").append(a);
         });
         $(document).on('click', '.remove-output-field', function() {
             $(this).parents('tr').remove();

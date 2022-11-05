@@ -62,17 +62,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
             // etc...
         ],
     ]);
-    // Route::resource('foto', FotoController::class, [
-    //     'names' => [
-    //         'index' => 'foto',
-    //         'create' => 'foto.tambah',
-    //         'store' => 'foto.store',
-    //         'edit' => 'foto.edit',
-    //         'update' => 'foto.update',
-    //         'show' => 'foto.detail'
-    //         // etc...
-    //     ]
-    // ]);
     Route::resource('realisasi', RealisasiController::class, [
         'names' => [
             'index' => 'realisasi',
@@ -116,6 +105,8 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::get('/foto/pekerjaan/{pekerjaan}', [App\Http\Controllers\FotoController::class, 'progress']);
     Route::post('/foto/pekerjaan/post', [App\Http\Controllers\FotoController::class, 'storeFoto']);
+    Route::post('/foto/upload/', [App\Http\Controllers\FotoController::class, 'store'])->name('foto.store');
+    Route::delete('foto/hapus/{foto}', [App\Http\Controllers\FotoController::class, 'destroy'])->name('foto.hapus');
 
     Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
 
@@ -132,7 +123,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     Route::get('/kegiatan', [App\Http\Controllers\PekerjaanController::class, 'index']);
     Route::get('/kegiatan/{id}', [App\Http\Controllers\PekerjaanController::class, 'kegiatan'])->name('kegiatan');
 
-    Route::get('/dok/tambah', [App\Http\Controllers\DokumenController::class, 'create']);
+    Route::get('/dok/tambah', [App\Http\Controllers\DokumenController::class, 'create'])->name('dokumen.post');
 });
 
 require __DIR__.'/auth.php';
