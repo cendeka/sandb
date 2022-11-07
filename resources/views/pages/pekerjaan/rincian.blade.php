@@ -103,10 +103,18 @@
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
+                                <label for="ta">Tahun Anggaran</label>
+                                <select id="ta" value="" name="ta" class="form-control select" >
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label>Program</label>
                                 <select id="program_id" name="program_id" class="form-control select" required
                                     style="width: 100%;">
-                                    <option selected disabled value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
+                                    <option selected value="">Pilih Program/Kegiatan/Sub Kegiatan</option>
                                     <optgroup label="Pembangunan MCK">
                                         <option value="1">Pembangunan MCK Komunal</option>
                                         <option value="2">Pembangunan MCK Skala Individu</option>
@@ -361,11 +369,12 @@
     </script>
     <script>
         jQuery(document).ready(function() {
-            jQuery($('#program_id, #program')).on('change', function() {
-                var kegID = jQuery(this).val();
+            jQuery($('#ta, #program_id')).on('change', function() {
+                var ta = jQuery('#ta').val();
+                var kegID = jQuery('#program_id').val();
                 if (kegID) {
                     jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/rincian/' + kegID,
+                        url: '/pekerjaan/kegiatan/rincian/'+kegID+'/'+ta+'',
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
