@@ -93,24 +93,20 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    @if ($pekerjaan->output != null)
-                                                    @foreach ($pekerjaan->output->output as $item)
-                                                    <th>{{ $item['komponen'] }}</th>
+                                                    @foreach ($pekerjaan->output as $output)
+                                                        <th>
+                                                            {{ $output->komponen }}
+                                                        </th>
                                                     @endforeach
-                                                    @else
-                                                        <p>Belum Diinput</p>
-                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    @if ($pekerjaan->output != null)
-                                                    @foreach ($pekerjaan->output->output as $item)
-                                                    <td>{{ $item['volume'] }}</td>
+                                                    @foreach ($pekerjaan->output as $output)
+                                                        <td>
+                                                            {{ $output->volume }} - {{ $output->satuan }}
+                                                        </td>
                                                     @endforeach
-                                                    @else
-                                                    <p>Belum Diinput</p>
-                                                    @endif
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -461,56 +457,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bd-example-modal-lg" id="modal-realisasi" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Realisasi Ouput</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="needs-validation" novalidate="" action="/realisasi/output/" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                @if ($pekerjaan->output != null)
-                                                @foreach ($pekerjaan->output->output as $item)
-                                                <th>{{ $item['komponen'] }}</th>
-                                                @endforeach
-                                                @else
-                                                <p>Belum Diinput</p>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                @if ($pekerjaan->output != null)
-                                                @foreach ($pekerjaan->output->output as $item)
-                                                <td><input type="text" class="form-control"></td>
-                                                @endforeach
-                                                @else
-                                                <p>Belum Diinput</p>
-                                                @endif
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
     {{-- Modal Rincian Kegiatan --}}
     <div class="modal fade bd-example-modal-lg" id="modal-paket" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">

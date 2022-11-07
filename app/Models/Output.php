@@ -22,4 +22,16 @@ class Output extends Model
     {
         return $this->hasMany(OutputRealisasi::class, 'output_id', 'id');
     }
+
+    /**
+     * Get the rincian associated with the Rincian
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function rincian()
+    {
+        return $this->hasMany(Rincian::class, 'pekerjaan_id', 'pekerjaan_id');
+    }
+
+
 }

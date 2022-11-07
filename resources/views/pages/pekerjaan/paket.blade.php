@@ -29,6 +29,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Detail Rincian Kegiatan</h5>
+                        <span>Rincian kegiatan output dan outcome</span>
                         <div class="card-header-right">
                             <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#modal-paket"
                                 data-bs-original-title="" title=""> <span class="fa fa-edit"></span>
@@ -62,14 +63,9 @@
                                             </td>
                                             <td>{{ $item->outcome }} Jiwa</td>
                                             <td>
-                                                @if ($item->output != null)
-                                                    @foreach ($item->output as $p)
-                                                        <b>{{ $p['komponen'] }}</b>: {{ $p['volume'] }}
-                                                        {{ $p['satuan'] }}<br />
-                                                    @endforeach
-                                                @else
-                                                    <p>Belum Diinput</p>
-                                                @endif
+                                                @foreach ($item->output as $output)
+                                                    {{$output->komponen}} {{$output->volume}} <br>
+                                                @endforeach
                                             </td>
                                             <td>
                                                 <div class="row">
@@ -99,7 +95,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="modal-content-tambah">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Rincian Kegiatan</h5>
+                    <h5 class="modal-title">Tambah Rincian Kegiatan</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-tambah">
@@ -187,7 +183,7 @@
                     <div class="modal-status bg-danger"></div>
                     <div class="modal-body text-center py-4">
                         <h3>Apakah anda yakin?</h3>
-                        <div class="text-muted">Hapus Paket Pekerjaan {{ $d->pekerjaan->nama_pekerjaan }}</div>
+                        <div class="text-muted">Hapus Rincian Kegiatan {{ $d->pekerjaan->nama_pekerjaan }}</div>
                     </div>
                     <div class="modal-footer">
                         <div class="w-100">
@@ -215,12 +211,13 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="modal-content-ubah">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Kontrak</h5>
+                    <h5 class="modal-title">Ubah Data Rincian</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-ubah">
-                    <form class="needs-validation" novalidate="" action="{{route('rincian.store')}}" method="POST">
+                    <form class="needs-validation" novalidate="" action="{{route('rincian.update',$d->id)}}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="modal-body">
                             <input type="text" value="{{$d->id}}" name="id" id="rincianID" hidden>
                             <div class="mb-3">
@@ -259,22 +256,19 @@
                                         <label class="form-label">Target Output</label> <br><button type="button" name="add" id="update-output"
                                         class="btn btn-outline-primary">Tambah</button>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
                                     <table class="table" id="komponen">
-                                            @foreach ($d->output as $item)
-                                            <tr>
-                                                <td><input type="text" name="output[0][komponen]" class="form-control"
-                                                        placeholder="Komponen" value="{{$item['komponen']}}"></td>
-                                                <td><input type="number" name="output[0][volume]" class="form-control"
-                                                        placeholder="Volume" value="{{$item['volume']}}"></td>
-                                                <td><input type="text" name="output[0][satuan]" class="form-control"
-                                                        placeholder="Satuan" value="{{$item['satuan']}}"></td>
-                                                        <td><button type="button"
-                                                        class="btn btn-outline-danger remove-output-field">Hapus</button>
-                                                </td>
-                                            </tr>
-                                            @endforeach
+                                        @foreach ($d->output as $key => $output)
+                                        <tr>
+                                            <input type="hidden" name="output[{{$key}}][id]" value="{{$output['id']}}">
+                                            <td><input type="text" name="output[{{$key}}][komponen]" class="form-control"
+                                                    placeholder="Komponen" value="{{$output->komponen}}"></td>
+                                            <td><input type="number" name="output[{{$key}}][volume]" class="form-control"
+                                                    placeholder="Volume" value="{{$output->volume}}"></td>
+                                            <td><input type="text" name="output[{{$key}}][satuan]" class="form-control"
+                                                    placeholder="Satuan" value="{{$output->satuan}}"></td>
+                                            <td><button type="button" name="add" class="btn btn-outline-danger remove-output-field">Hapus</button></td>
+                                        </tr>
+                                        @endforeach
                                     </table>
                                 </div>
                             </div>
@@ -392,8 +386,8 @@
         });
     </script>
     <script>
+        var i = 0;
         $("#tambah-output, #update-output").click(function() {
-            var i = 0;
             ++i;
             var a = '<tr>' +
                 ' <td><input type="text" name="output[' + i + '][komponen]" class="form-control"' +

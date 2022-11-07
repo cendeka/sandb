@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Foto;
 use App\Models\Kontrak;
+use App\Models\Output;
 use App\Models\Pekerjaan;
 use App\Models\Rincian;
 use Illuminate\Http\Request;
@@ -20,6 +21,10 @@ class DashboardController extends Controller
         //Variabel Statistik
         $foto = Foto::with('pekerjaan')->get();
         $pekerjaan = Pekerjaan::with('kegiatan', 'foto')->get();
+        $sr = Output::where('komponen', 'SR')->sum('volume');
+        $ipal = Output::where('komponen', 'IPAL')->sum('volume');
+        $mck = Output::where('komponen', 'MCK')->sum('volume');
+
         $penerima_manfaat = Rincian::sum('outcome');
         $total_pagu = $pekerjaan->sum('pagu');
         $total_pekerjaan = $pekerjaan->count();
@@ -33,12 +38,6 @@ class DashboardController extends Controller
             // Sama dengan atau lebih satu miliar
             $pagu = number_format($total_pagu / 1000000000, 1, ',', '').' Miliar';
         }
-        //  dd($pekerjaan);
-        $am1 = Pekerjaan::where('program_id', '=', 3)->get();
-        $am2 = Pekerjaan::where('program_id', '=', 4)->get();
-        $am3 = Pekerjaan::where('program_id', '=', 5)->get();
-        $sandak = Pekerjaan::where('program_id', '=', 1)->get();
-        $mck = Pekerjaan::where('program_id', '=', 2)->get();
 
         $get_kontrak = Kontrak::get();
         $total_kontrak = $get_kontrak->sum('harga_kontrak');
@@ -56,11 +55,6 @@ class DashboardController extends Controller
 
         return view('pages.dashboard', [
             'title' => 'Dashboard',
-            'am1' => $am1,
-            'am2' => $am2,
-            'am3' => $am3,
-            'sandak' => $sandak,
-            'mck' => $mck,
             'pagu' => $pagu,
             'total_pagu' => $total_pagu,
             'total_pekerjaan' => $total_pekerjaan,
@@ -68,10 +62,41 @@ class DashboardController extends Controller
             'realisasi' => $realisasi_kontrak,
             'penerima_manfaat' => $penerima_manfaat,
             'foto' => $foto,
+            'sr' => $sr,
+            'ipal' => $ipal,
+            'mck' => $mck,
 
         ]);
     }
 
+    public function commits()
+    {
+    exec('git log', $output);
+    $history = array();
+
+    foreach($output as $line) {
+        if(strpos($line, 'commit') === 0) {
+            if(!empty($commit)) {
+                array_push($history, $commit);   
+                unset($commit);
+            }
+            $commit['hash']   = substr($line, strlen('commit'));
+            }
+            else if(strpos($line, 'Author') === 0) {
+            $commit['author'] = substr($line, strlen('Author:'));
+            }
+            else if(strpos($line, 'Date') === 0) {
+                $commit['date']   = substr($line, strlen('Date:'));
+            }
+            else {
+                if(isset($commit['message']))
+                    $commit['message'] .= $line;
+                else
+                    $commit['message'] = $line;
+            }
+        }
+        return $history; // Array of commits, parse it to json if you need
+    }
     /**
      * Show the form for creating a new resource.
      *
