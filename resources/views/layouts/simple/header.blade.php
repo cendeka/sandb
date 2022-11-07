@@ -239,9 +239,9 @@
             </div>
           </div>
         </li> --}}
-        <li>
+        {{-- <li>
           <div class="mode"><i class="fa fa-moon-o"></i></div>
-        </li>
+        </li> --}}
         {{-- <li class="cart-nav onhover-dropdown">
           <div class="cart-box"><i data-feather="shopping-cart"></i><span class="badge rounded-pill badge-primary">2</span></div>
           <ul class="cart-dropdown onhover-show-div">
@@ -336,10 +336,10 @@
             <li class="text-center"> <a class="btn btn-primary" href="#">View All     </a></li>
           </ul>
         </li> --}}
-        <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
+        {{-- <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li> --}}
         <li class="profile-nav onhover-dropdown p-0 me-0">
           <div class="media profile-media">
-            <img class="b-r-10" src="{{asset('assets/images/dashboard/profile.jpg')}}" alt="">
+            <img class="b-r-10" src="{{asset('assets/images/cianjurkab-logo.png')}}" style="width: 50px;" alt="user">
             <div class="media-body">
               <span>{{Auth::user()->name}}</span>
               <p class="mb-0 font-roboto">{{Auth::user()->roles->first()->name}} <i class="middle fa fa-angle-down"></i></p>

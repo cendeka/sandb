@@ -15,18 +15,11 @@
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
     <style>
-        #map {
-            height: 300px;
-            z-index: 0;
-        }
-
         #mapid {
             height: 300px;
             z-index: 0;
         }
     </style>
-    <script src="{{ asset('js') }}/getloc.js"></script>
-
 @endsection
 
 @section('style')
@@ -93,20 +86,24 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
+                                                    @if ($pekerjaan->output != null)
                                                     @foreach ($pekerjaan->output as $output)
-                                                        <th>
-                                                            {{ $output->komponen }}
-                                                        </th>
-                                                    @endforeach
+                                                    <th>
+                                                        {{ $output->komponen }}
+                                                    </th>
+                                                @endforeach
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    @if ($pekerjaan->output != null)
                                                     @foreach ($pekerjaan->output as $output)
-                                                        <td>
-                                                            {{ $output->volume }} - {{ $output->satuan }}
-                                                        </td>
-                                                    @endforeach
+                                                    <td>
+                                                        {{ $output->volume }} - {{ $output->satuan }}
+                                                    </td>
+                                                @endforeach
+                                                    @endif
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -124,8 +121,6 @@
                         </div>
                         <hr>
                         <div class="m-t-15">
-                            <button class="btn btn-primary m-r-10" type="button" title="" data-bs-toggle="modal"
-                                data-bs-target="#modal-foto"> <i class="fa fa-camera me-1"></i>Upload Foto</button>
                             <button class="btn btn-success m-r-10" type="button" title="" data-bs-toggle="modal"
                                 data-bs-target="#modal-dokumen"> <i class="fa fa-file me-1"></i>Upload Dokumen</button>
                             @role('admin')
@@ -217,6 +212,8 @@
         <div class="card">
             <div class="card-body">
                 <div id="mapid"></div>
+                <div id="map"></div>
+
             </div>
         </div>
         <div class="card">
@@ -289,77 +286,6 @@
                             <div class="pswp__caption__center"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade bd-example-modal-lg" id="modal-foto" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Upload Foto</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="needs-validation" novalidate="" action="{{ route('foto.store') }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div>
-                                        <input type="text" value="{{ $pekerjaan->id }}" name="pekerjaan_id" hidden>
-                                        <input type="file" name="images[]" multiple class="form-control"
-                                            accept="image/*">
-                                        @if ($errors->has('files'))
-                                            @foreach ($errors->get('files') as $error)
-                                                <div class="invalid-feedback"><a
-                                                        class="text-danger">{{ $error }}</a></div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <label for="">Koordinat</label>
-                                    <div id="map"></div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <button id="clickMe" class="btn btn-primary btn-toast" type="button">Dapatkan
-                                    Koordinat</button>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" id="lat" name="lat" class="form-control"
-                                        placeholder="Latitude">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" id="long" name="long" class="form-control"
-                                        placeholder="Longtitude">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div>
-                                        <label for="">Keterangan</label>
-                                        <textarea type="text" name="keterangan" class="form-control" id=""></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -556,24 +482,6 @@
                 toast.addEventListener('mouseenter', Swal.stopTimer)
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-        });
-
-        document.querySelector(".btn-toast").addEventListener('click', function() {
-            Swal.fire({
-                toast: true,
-                html: '<ul id="status" class="progressing">' +
-                    '</ul>',
-                icon: 'info',
-                title: 'Mencari titik Koordinat... (Izinkan Akses Data Lokasi)',
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 12000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
         });
     </script>
     <script>

@@ -31,14 +31,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
 
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('/');
 
-    // Route::resource('dashboard', DashboardController::class, [
-    //     'names' => [
-    //         'index' => 'dashboard',
-    //         // etc...
-    //     ]
-    // ]);
-
-
     Route::resource('pekerjaan', PekerjaanController::class, [
         'names' => [
             'index' => 'pekerjaan',
@@ -95,6 +87,14 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
             // etc...
         ],
     ]);
+
+    Route::resource('foto', FotoController::class, [
+        'names' => [
+            'index' => 'foto.index',
+            // etc...
+        ],
+    ]);
+
     // Route::get('/pekerjaan/{pekerjaan_id}', [PekerjaanController::class, 'pekerjaan.detail']);
     // Single
     Route::get('fetch-git-commits', [App\Http\Controllers\DashboardController::class, 'commits']);

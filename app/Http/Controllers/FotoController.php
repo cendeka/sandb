@@ -19,9 +19,10 @@ class FotoController extends Controller
     public function index()
     {
         //
-        $foto = Foto::get();
+        $foto = Foto::with('pekerjaan')->take(10)->get();
+        $title = "Foto Kegiatan";
 
-        return view('halaman.foto.index', compact('foto'));
+        return view('pages.dokumentasi.foto', compact('foto','title'));
     }
 
     /**

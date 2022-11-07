@@ -23,7 +23,7 @@ class RincianController extends Controller
         $program = Kegiatan::get();
         $title = 'Rincian Pekerjaan';
 
-        return view('pages.pekerjaan.paket', compact('data', 'title','program'));
+        return view('pages.pekerjaan.rincian', compact('data', 'title','program'));
     }
 
     /**
