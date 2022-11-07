@@ -29,16 +29,12 @@ class Rincian extends Model
     }
 
     /**
-     * Get the user associated with the Paket
+     * Get the user associated with the Output
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function output()
     {
-        return $this->hasOne(Output::class, 'pekerjaan_id', 'pekerjaan_id');
+        return $this->hasMany(Output::class, 'pekerjaan_id', 'pekerjaan_id');
     }
-
-    protected $casts = [
-        'output' => 'array',
-    ];
 }

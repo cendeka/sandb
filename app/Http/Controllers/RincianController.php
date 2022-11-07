@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Alert;
 use App\Models\Rincian;
 use App\Models\Kegiatan;
+use App\Models\Output;
+
 
 use Illuminate\Http\Request;
 
@@ -46,7 +48,11 @@ class RincianController extends Controller
         $rules = [
             'pekerjaan_id' => 'required',
             'outcome' => 'required',
-            'output' => 'required',
+            'output.*.komponen' => 'required',
+            'output.*.volume' => 'required',
+            'output.*.satuan' => 'required'
+
+
 
         ];
 
@@ -58,7 +64,7 @@ class RincianController extends Controller
         $attributeNames = [
             'pekerjaan_id' => 'Kegiatan',
             'outcome' => 'Target Outcome',
-            'output' => 'Target Output',
+
 
         ];
 
@@ -70,9 +76,19 @@ class RincianController extends Controller
             ],
             [
             'pekerjaan_id' => $request->pekerjaan_id,
-            'outcome' => $request->outcome,
-            'output' => $request->output,
-            ]);        
+            'outcome' => $request->outcome,            
+        ]);
+        foreach ($request->output as $key => $value) {
+            $output = Output::create(
+                [
+                    'pekerjaan_id' => $request->pekerjaan_id,
+                    'komponen' => $value['komponen'],
+                    'volume' => $value['volume'],
+                    'satuan' => $value['satuan'],
+                ]
+            );        
+        }
+        
         Alert::success('Rincian Pekerjaan', 'Data Rincian Pekerjaan Berhasil Ditambahkan');
         return redirect()->back();
     }
@@ -141,8 +157,19 @@ class RincianController extends Controller
             [
             'pekerjaan_id' => $request->pekerjaan_id,
             'outcome' => $request->outcome,
-            'output' => $request->output,
-            ]);
+        ]);
+        foreach ($request->output as $key => $value) {
+            $output = Output::updateOrCreate(
+                [
+                    'id' => $value['id']
+                ],
+                [
+                    'komponen' => $value['komponen'],
+                    'volume' => $value['volume'],
+                    'satuan' => $value['satuan'],
+                ]
+            );        
+        }
         Alert::success('Paket Pekerjaan', 'Data Paket Pekerjaan Berhasil Diubah');
 
         return redirect()->back();
@@ -156,7 +183,9 @@ class RincianController extends Controller
      */
     public function destroy(Rincian $rincian)
     {
+        $rincian->output()->delete();
         $rincian->delete();
+
         Alert::success('Paket Pekerjaan', 'Data Paket Pekerjaan Berhasil Dihapus');
 
         return redirect()->back();

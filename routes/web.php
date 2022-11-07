@@ -97,6 +97,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     ]);
     // Route::get('/pekerjaan/{pekerjaan_id}', [PekerjaanController::class, 'pekerjaan.detail']);
     // Single
+    Route::get('fetch-git-commits', [App\Http\Controllers\DashboardController::class, 'commits']);
     Route::post('/tfl/lokasi/', [App\Http\Controllers\UsersController::class, 'lokasi'])->name('tfl.lokasi');
 
     Route::get('/cover/kontrak/', [App\Http\Controllers\KontrakController::class, 'cover']);

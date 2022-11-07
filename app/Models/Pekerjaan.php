@@ -96,11 +96,11 @@ class Pekerjaan extends Model
     /**
      * Get the user associated with the Pekerjaan
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function output()
     {
-        return $this->hasOne(Rincian::class, 'pekerjaan_id', 'id');
+        return $this->hasOne(Output::class, 'pekerjaan_id', 'id');
     }
 
     public static function boot()
