@@ -181,7 +181,7 @@
                                         <input name="nama_pengawas" type="text" class="form-control" required="">
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-8">
                                     <div class="mb-3" tabindex="0" id="currency">
                                         <label class="form-label">Nilai Kontrak</label>
                                         <div class="input-group input-group-flat">
@@ -189,6 +189,18 @@
                                                 data-type="currency" placeholder="Nilai Kontrak" required>
                                             <input value="" type="numeric" class="form-control" id="harga_kontrak"
                                                 name="harga_kontrak" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3" tabindex="0">
+                                        <label class="form-label">Tipe Kontrak</label>
+                                        <div class="input-group input-group-flat">
+                                            <select class="form-control" name="jenis_kontrak">
+                                                <option value="" selected>Pilih Jenis</option>
+                                                <option value="Penyedia">Penyedia</option>
+                                                <option value="Swakelola">Swakelola</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -269,15 +281,12 @@
                                     </optgroup>
                                     <optgroup label="SPALD-T">
                                         <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal
-                                            50 KK
+                                        <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal  50 KK
                                         </option>
                                     </optgroup>
                                     <optgroup label="SPALD-S">
                                         <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                        <option value="6">Pembangunan tangki septik skala individual perdesaan
-                                            minimal
-                                            50 KK </option>
+                                        <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -341,13 +350,25 @@
                                             required="">
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-8">
                                     <div class="mb-3">
                                         <label class="form-label">Nilai Kontrak</label>
                                         <input type="text" class="form-control" name="pagu" id="kontrak"
                                             data-type="currency" placeholder="Nilai Kontrak" required>
                                         <input id="n_kontrak" name="harga_kontrak" type="number" class="form-control"
                                             required="" hidden>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3" tabindex="0">
+                                        <label class="form-label">Tipe Kontrak</label>
+                                        <div class="input-group input-group-flat">
+                                            <select class="form-control" name="jenis_kontrak" id="jenis_kontrak">
+                                                <option value="" selected>Pilih Jenis</option>
+                                                <option value="Penyedia">Penyedia</option>
+                                                <option value="Swakelola">Swakelola</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -427,6 +448,9 @@
                     var $2 = $("<option selected='selected'></option>").val(res.pekerjaan.id)
                         .text(res.pekerjaan.nama_pekerjaan)
                     $("#kegiatan").append($2);
+                    var $3 = $("<option selected='selected'></option>").val(res.jenis_kontrak)
+                        .text(res.jenis_kontrak)
+                    $("#jenis_kontrak").append($3);
                 }
             });
         })

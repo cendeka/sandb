@@ -119,13 +119,11 @@
                                         </optgroup>
                                         <optgroup label="SPALD-T">
                                             <option value="3">Pembangunan IPAL Skala Permukiman minimal 50 KK</option>
-                                            <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal
-                                                50 KK</option>
+                                            <option value="4">Pembangunan IPAL Skala Permukiman kombinasi MCK minimal 50 KK</option>
                                         </optgroup>
                                         <optgroup label="SPALD-S">
                                             <option value="5">Pembangunan tangki septik komunal (5-10 KK) </option>
-                                            <option value="6">Pembangunan tangki septik skala individual perdesaan
-                                                minimal 50 KK </option>
+                                            <option value="6">Pembangunan tangki septik skala individual perdesaan minimal 50 KK </option>
                                         </optgroup>
                                     </select>
                                 </div>
