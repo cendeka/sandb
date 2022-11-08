@@ -108,8 +108,11 @@ class OutputController extends Controller
      * @param  \App\Models\Output  $output
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Output $output)
+    public function destroy(Request $request)
     {
-        //
+
+        $data = Output::where('id', $request->id)->delete();
+        // return redirect()->back()->with('message', 'Data Berhasil Dihapus');
+        return response()->json($data, 200);
     }
 }

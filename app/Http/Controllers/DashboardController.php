@@ -21,9 +21,9 @@ class DashboardController extends Controller
         //Variabel Statistik
         $foto = Foto::with('pekerjaan')->get();
         $pekerjaan = Pekerjaan::with('kegiatan', 'foto')->get();
-        $sr = Output::where('komponen', 'SR')->sum('volume');
         $ipal = Output::where('komponen', 'IPAL')->sum('volume');
         $mck = Output::where('komponen', 'MCK')->sum('volume');
+        $ts = Output::where('komponen', 'Tangki Septik')->sum('volume');
 
         $penerima_manfaat = Rincian::sum('outcome');
         $total_pagu = $pekerjaan->sum('pagu');
@@ -62,9 +62,10 @@ class DashboardController extends Controller
             'realisasi' => $realisasi_kontrak,
             'penerima_manfaat' => $penerima_manfaat,
             'foto' => $foto,
-            'sr' => $sr,
             'ipal' => $ipal,
             'mck' => $mck,
+            'ts' => $ts,
+
 
         ]);
     }
