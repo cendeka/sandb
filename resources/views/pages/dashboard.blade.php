@@ -108,12 +108,12 @@
                                     <p class="font-roboto">IPAL</p>
                                 </div>
                                 <div class="col-xl-12 p-0 left_side_earning">
-                                    <h5>{{ $sr }}</h5>
-                                    <p class="font-roboto">Sambungan Rumah</p>
-                                </div>
-                                <div class="col-xl-12 p-0 left_side_earning">
                                     <h5>{{ $mck }}</h5>
                                     <p class="font-roboto">MCK</p>
+                                </div>
+                                <div class="col-xl-12 p-0 left_side_earning">
+                                    <h5>{{ $ts }}</h5>
+                                    <p class="font-roboto">Tangki Septik</p>
                                 </div>
                                 <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">Ringkasan</a></div>
                             </div>

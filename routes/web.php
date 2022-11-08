@@ -110,6 +110,8 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     Route::delete('foto/hapus/{foto}', [App\Http\Controllers\FotoController::class, 'destroy'])->name('foto.hapus');
 
     Route::post('/target/output/', [App\Http\Controllers\OutputController::class, 'store']);
+    Route::post('/target/output/delete/', [App\Http\Controllers\OutputController::class, 'destroy'])->name('output.destroy');
+
 
     Route::get('/wilayah/kecamatan', [App\Http\Controllers\KecamatanController::class, 'index']);
     Route::get('/wilayah/desa', [App\Http\Controllers\DesaController::class, 'index']);

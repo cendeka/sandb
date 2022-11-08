@@ -79,7 +79,10 @@ class RincianController extends Controller
             'outcome' => $request->outcome,            
         ]);
         foreach ($request->output as $key => $value) {
-            $output = Output::create(
+            $output = Output::updateOrCreate(
+                [
+                    'id' => $value['id']
+                ],
                 [
                     'pekerjaan_id' => $request->pekerjaan_id,
                     'komponen' => $value['komponen'],
@@ -164,6 +167,7 @@ class RincianController extends Controller
                     'id' => $value['id']
                 ],
                 [
+                    'pekerjaan_id' => $request->pekerjaan_id,
                     'komponen' => $value['komponen'],
                     'volume' => $value['volume'],
                     'satuan' => $value['satuan'],
