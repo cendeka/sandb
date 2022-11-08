@@ -13,7 +13,7 @@
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
     <style>
         #mapid {
-            height: 100%;
+            height: 350px;
 			z-index: 0;
         }
     </style>
