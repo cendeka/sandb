@@ -103,6 +103,16 @@ class Pekerjaan extends Model
         return $this->hasMany(Output::class, 'pekerjaan_id', 'id');
     }
 
+    /**
+     * Get the rincian associated with the Pekerjaan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rincian()
+    {
+        return $this->hasOne(Rincian::class, 'pekerjaan_id', 'id');
+    }
+
     public static function boot()
     {
         parent::boot();
