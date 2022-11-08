@@ -82,32 +82,17 @@
                                     <tr>
                                         <td><b>Output</b></td>
                                     </tr>
-                                    <tr>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    @if ($pekerjaan->output != null)
-                                                    @foreach ($pekerjaan->output as $output)
-                                                    <th>
-                                                        {{ $output->komponen }}
-                                                    </th>
-                                                @endforeach
-                                                    @endif
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    @if ($pekerjaan->output != null)
-                                                    @foreach ($pekerjaan->output as $output)
-                                                    <td>
-                                                        {{ $output->volume }} - {{ $output->satuan }}
-                                                    </td>
-                                                @endforeach
-                                                    @endif
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </tr>
+                            
+                                        @if ($pekerjaan->output != null)
+                                            @foreach ($pekerjaan->output as $output)
+                                            <tr>
+                                                <td> {{ $output->komponen }} : {{ $output->volume }} {{ $output->satuan }}
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @endif
+                                
                                     <tr>
                                         <td><b>Realisasi</b></td>
                                         {{-- <td>{{ $pekerjaan->kec->n_kec }}</td> --}}
@@ -225,9 +210,8 @@
             <div class="gallery my-gallery card-body row" itemscope="">
                 @foreach ($foto as $f)
                     <figure class="col-xl-3 col-md-4 col-6" itemprop="associatedMedia" itemscope="">
-                        <a href="{{ $f->path }}" itemprop="contentUrl" data-size="300x300"><img
-                                class="img-thumbnail" src="{{ $f->path }}" itemprop="thumbnail"
-                                alt="Image description"></a>
+                        <a href="{{ $f->path }}" itemprop="contentUrl" data-size="300x300"><img class="img-thumbnail"
+                                src="{{ $f->path }}" itemprop="thumbnail" alt="Image description"></a>
                         <figcaption itemprop="caption description">
                             <form action="{{ route('foto.hapus', $f->id) }}" method="post">
                                 @method('DELETE')

@@ -100,7 +100,7 @@ class Pekerjaan extends Model
      */
     public function output()
     {
-        return $this->hasOne(Output::class, 'pekerjaan_id', 'id');
+        return $this->hasMany(Output::class, 'pekerjaan_id', 'id');
     }
 
     public static function boot()
