@@ -11,7 +11,7 @@ class Kontrak extends Model
 
     protected $table = 'db_kontrak';
 
-    protected $fillable = ['program_id', 'pekerjaan_id', 'harga_kontrak', 'no_spk', 'tgl_spk', 'tgl_mulai', 'tgl_selesai', 'nama_pelaksana', 'nama_pengawas'];
+    protected $fillable = ['program_id', 'pekerjaan_id', 'harga_kontrak', 'no_spk', 'tgl_spk', 'tgl_mulai', 'tgl_selesai', 'nama_pelaksana', 'nama_pengawas','jenis_kontrak'];
 
     /**
      * Get the user associated with the Kontrak

@@ -60,6 +60,8 @@ class KontrakController extends Controller
             'tgl_selesai' => 'required',
             'nama_pelaksana' => 'required',
             'nama_pengawas' => 'required',
+            'jenis_kontrak' => 'required',
+
 
         ];
 
@@ -80,6 +82,8 @@ class KontrakController extends Controller
             'tgl_selesai' => 'Tanggal Selesai',
             'nama_pelaksana' => 'Nama Pelaksana',
             'nama_pengawas' => 'Nama Pengawas',
+            'jenis_kontrak' => 'Jenis Kontrak',
+
         ];
 
         $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
@@ -101,6 +105,7 @@ class KontrakController extends Controller
             'tgl_selesai' => $request->tgl_selesai,
             'nama_pelaksana' => $request->nama_pelaksana,
             'nama_pengawas' => $request->nama_pengawas,
+            'jenis_kontrak' => $request->jenis_kontrak,
         ]);
         Alert::success('Kontrak', 'Data Kontrak Berhasil Ditambahkan');
 
