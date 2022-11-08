@@ -105,9 +105,9 @@
                             <div class="mb-3">
                                 <label for="ta">Tahun Anggaran</label>
                                 <select id="ta" value="" name="ta" class="form-control select" >
+                                    <option value="" selected>Pilih Tahun Anggaran</option>
                                     <option value="2022">2022</option>
                                     <option value="2021">2021</option>
-
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -228,6 +228,14 @@
                         @method('PUT')
                         <div class="modal-body">
                             <input type="text" value="{{$d->id}}" name="id" id="rincianID" hidden>
+                            <div class="mb-3">
+                                <label for="tahun_anggaran">Tahun Anggaran</label>
+                                <select id="tahun_anggaran" name="ta" class="form-control select" >
+                                    <option value="" selected>Pilih Tahun Anggaran</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <label>Program</label>
                                 <select id="program" name="program_id"
@@ -382,6 +390,33 @@
                             jQuery($('#pekerjaan_id, #kegiatan')).empty();
                             jQuery.each(data, function(key, value) {
                                 $($('#pekerjaan_id, #kegiatan')).append(
+                                    '<option value="' +
+                                    value.id + '">' + value.nama_pekerjaan +
+                                    '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $($('#pekerjaan_id')).empty();
+                }
+            });
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery($('#tahun_anggaran, #program')).on('change', function() {
+                var ta = jQuery('#ta').val();
+                var kegID = jQuery('#program').val();
+                if (kegID) {
+                    jQuery.ajax({
+                        url: '/pekerjaan/kegiatan/rincian/'+kegID+'/'+ta+'',
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            console.log(data);
+                            jQuery($('#kegiatan')).empty();
+                            jQuery.each(data, function(key, value) {
+                                $($('#kegiatan')).append(
                                     '<option value="' +
                                     value.id + '">' + value.nama_pekerjaan +
                                     '</option>');
