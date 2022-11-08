@@ -37,7 +37,8 @@
                                         <th>Desa</th>
                                         <th>Luas Wilayah</th>
                                         <th>Jumlah Penduduk</th>
-                                        <th>Sarana Terbangun</th>
+                                        <th>Penduduk Terlayani</th>
+                                        <th>Persentase Layanan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,11 +47,38 @@
                                     @endphp
                                     @foreach ($data as $item)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
+                                            <td style="width: 10%">{{ $i++ }}</td>
                                             <td>{{ $item->n_desa }}</td>
                                             <td>{{$item->luas}} m2</td>
                                             <td>{{$item->jumlah_penduduk}} Jiwa</td>
-                                            <td>{{$item->kegiatan->count()}}</td>
+                                            <td>
+                                                @foreach ($item->kegiatan as $pekerjaan)
+                                                  @if ($pekerjaan->rincian != null)
+                                                  @php
+                                                      $penduduk_terlayani = $pekerjaan->rincian->outcome;
+                                                      $jumlah_penduduk = $item->jumlah_penduduk;
+                                                      $persentase = divnum($penduduk_terlayani, $jumlah_penduduk)*100;
+                                                  @endphp
+                                                         {{$penduduk_terlayani}} Jiwa
+                                                  @else
+                                                      <span>Data Belum Tersedia</span>
+                                                  @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($item->kegiatan as $pekerjaan)
+                                                @if ($pekerjaan->rincian != null)
+                                                @php
+                                                    $penduduk_terlayani = $pekerjaan->rincian->outcome;
+                                                    $jumlah_penduduk = $item->jumlah_penduduk;
+                                                    $persentase = divnum($penduduk_terlayani, $jumlah_penduduk)*100;
+                                                @endphp
+                                                       {{number_format($persentase,3,',','')}}%
+                                                @else
+                                                    <span>Data Belum Tersedia</span>
+                                                @endif
+                                              @endforeach
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

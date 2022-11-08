@@ -24,7 +24,7 @@ class DesaController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Desa::with('kec','kegiatan')->where('kec_id',$request->id)->get();
+        $data = Desa::with('kec','kegiatan.rincian')->where('kec_id',$request->id)->get();
         foreach ($data as $key => $value) {
             # code...
            $kecamatan = $value->kec->n_kec;

@@ -30,4 +30,5 @@ class Desa extends Model
     {
         return $this->hasMany(Pekerjaan::class, 'desa_id', 'id');
     }
+
 }
