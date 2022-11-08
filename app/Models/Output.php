@@ -33,5 +33,14 @@ class Output extends Model
         return $this->hasMany(Rincian::class, 'pekerjaan_id', 'pekerjaan_id');
     }
 
+    /**
+     * Get the user that owns the Output
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pekerjaan()
+    {
+        return $this->belongsTo(Pekerjaan::class, 'id', 'pekerjaan_id');
+    }
 
 }

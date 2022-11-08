@@ -40,8 +40,8 @@ class PekerjaanController extends Controller
 
     public function getPaket($keg_id, $tahun)
     {
-        $data = Pekerjaan::with('output')->get()
-        ->where('program_id', $keg_id)->where('tahun_anggaran', $tahun)->where('output', null);
+        $data = Pekerjaan::doesntHave('output')->get()
+        ->where('program_id', $keg_id)->where('tahun_anggaran', $tahun);
         // ->pluck('nama_pekerjaan', 'id');
 
         return response()->json($data);
