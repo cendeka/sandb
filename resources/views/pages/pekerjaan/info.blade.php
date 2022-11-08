@@ -123,12 +123,6 @@
                         <div class="m-t-15">
                             <button class="btn btn-success m-r-10" type="button" title="" data-bs-toggle="modal"
                                 data-bs-target="#modal-dokumen"> <i class="fa fa-file me-1"></i>Upload Dokumen</button>
-                            @role('admin')
-                                <button class="btn btn-info m-r-10" type="button" title="" data-bs-toggle="modal"
-                                    data-bs-target="#modal-output"> <i class="fa fa-check me-1"></i>Output</button>
-                            @endrole
-                            <button class="btn btn-info m-r-10" type="button" title="" data-bs-toggle="modal"
-                                data-bs-target="#modal-realisasi"> <i class="fa fa-check me-1"></i>Realisasi</button>
                         </div>
                     </div>
                 </div>
@@ -194,13 +188,6 @@
                                             <h5>Masa Pelaksanaan</h5>
                                             <p>{{ $days ?? 'Data Belum Diinput' }}</p>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <button class="btn btn-pill btn-primary" type="button" title=""
-                                            data-bs-toggle="modal" data-bs-target="#modal-paket"> <i
-                                                class="fa fa-file me-1"></i>Rincian Kegiatan</button>
                                     </div>
                                 </li>
                             </ul>
@@ -371,67 +358,6 @@
                                     <input name="satuan" type="text" class="form-control" id="floating-input"
                                         autocomplete="off">
                                     <label for="floating-input">Satuan</label>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Rincian Kegiatan --}}
-    <div class="modal fade bd-example-modal-lg" id="modal-paket" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content" id="modal-content-tambah">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Rincian Kegiatan</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body modal-tambah">
-                    <form class="needs-validation" novalidate="" action="{{ route('rincian.store') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <input type="hidden" name="pekerjaan_id" value="{{ $pekerjaan->id }}">
-                                        <input type="text" class="form-control"
-                                            value="{{ $pekerjaan->nama_pekerjaan }}" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <input type="text" name="output[0][komponen]" class="form-control"
-                                            placeholder="Komponen">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <input type="number" name="output[0][volume]" class="form-control"
-                                            placeholder="Volume">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <input type="text" name="output[0][satuan]" class="form-control"
-                                            placeholder="Satuan">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3" tabindex="0">
-                                    <label class="form-label">Keterangan</label>
-                                    <div class="input-group input-group-flat">
-                                        <textarea class="form-control" name="keterangan" id=""></textarea>
-                                    </div>
                                 </div>
                             </div>
                         </div>

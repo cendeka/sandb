@@ -142,6 +142,14 @@
                             <div class="col-lg-12">
                                 <div>
                                     <div class="mb-3">
+                                        <label for="tahun_anggaran">Tahun Anggaran</label>
+                                        <select id="tahun_anggaran" name="ta" class="form-control select" >
+                                            <option value="" selected>Pilih Tahun Anggaran</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
                                         <label>Program</label>
                                         <select id="program_id" name="program_id" class="form-control select" required
                                             style="width: 100%;">
@@ -271,12 +279,13 @@
         });
     </script>
     <script>
-          jQuery(document).ready(function() {
-            jQuery($('#program_id, #program')).on('change', function() {
-                var kegID = jQuery(this).val();
+        jQuery(document).ready(function() {
+            jQuery($('#tahun_anggaran, #program_id')).on('change', function() {
+                var ta = jQuery('#tahun_anggaran').val();
+                var kegID = jQuery('#program_id').val();
                 if (kegID) {
                     jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/rincian/' + kegID,
+                        url: '/pekerjaan/kegiatan/rincian/'+kegID+'/'+ta+'',
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
