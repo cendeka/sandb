@@ -162,6 +162,8 @@
                                 <div class="col-lg-12">
                                     <table class="table" id="divOutput">
                                         <tr>
+                                            <input type="hidden" name="output[0][id]" class="form-control"
+                                                    placeholder="Komponen">
                                             <td><input type="text" name="output[0][komponen]" class="form-control"
                                                     placeholder="Komponen"></td>
                                             <td><input type="number" name="output[0][volume]" class="form-control"
@@ -283,10 +285,8 @@
                                         <table class="table" id="komponen">
                                             @foreach ($d->output as $key => $output)
                                                 <tr>
-                                                    <td>
                                                         <input type="hidden" name="output[{{ $key }}][id]"
                                                             value="{{ $output->id }}">
-                                                    </td>
                                                     <td><input type="text"
                                                             name="output[{{ $key }}][komponen]"
                                                             class="form-control" placeholder="Komponen"
@@ -454,7 +454,7 @@
         $("#tambah-output, #update-output").click(function() {
             ++i;
             var a = '<tr>' +
-                ' <td><input type="hidden" name="output[' + i + '][id]" class="form-control"</td>' +
+                '<input type="hidden" name="output[' + i + '][id]" class="form-control">' +
                 ' <td><input type="text" name="output[' + i + '][komponen]" class="form-control"' +
                 'placeholder="Komponen"></td>' +
                 '<td><input type="number" name="output[' + i + '][volume]" class="form-control"' +
