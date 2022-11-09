@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $pekerjaan = Pekerjaan::with('kegiatan', 'foto')->get();
         $ipal = Output::where('komponen', 'IPAL')->sum('volume');
         $mck = Output::where('komponen', 'MCK')->sum('volume');
-        $ts = Output::where('komponen', 'Tangki Septik')->sum('volume');
+        $ts = Output::where('komponen', 'Tangki Septik')->orWhere('komponen', 'Tangki Septik Komunal')->sum('volume');
 
         $penerima_manfaat = Rincian::sum('outcome');
         $total_pagu = $pekerjaan->sum('pagu');
