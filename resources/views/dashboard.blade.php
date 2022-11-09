@@ -97,12 +97,12 @@
         dataType : "json",
         success:function(data) {
             // console.log(data.aaData[0][1]);
-            // $(tes).html(data.aaData[0][1]);   
+            // $(tes).html(data.aaData[0][1]);
             jQuery.each(data.aaData, function(key,value){
             console.log(value[3]);
             // $(tes).html(value[2]);
             // $($('#tes')).append('<p>"'+ value[2] +'"</p>');
-   
+
             })
         }
     })
