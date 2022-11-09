@@ -285,7 +285,7 @@
                 var kegID = jQuery('#program_id').val();
                 if (kegID) {
                     jQuery.ajax({
-                        url: '/pekerjaan/kegiatan/rincian/'+kegID+'/'+ta+'',
+                        url: '/pekerjaan/kegiatan/'+kegID+'/'+ta+'',
                         type: "GET",
                         dataType: "json",
                         success: function(data) {

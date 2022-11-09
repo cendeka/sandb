@@ -116,7 +116,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     Route::get('/wilayah/kecamatan', [App\Http\Controllers\KecamatanController::class, 'index']);
     Route::get('/wilayah/desa', [App\Http\Controllers\DesaController::class, 'index']);
     Route::get('/desa/{kec_id}', [App\Http\Controllers\DesaController::class, 'getdesa']);
-    Route::get('/pekerjaan/kegiatan/{keg_id}', [App\Http\Controllers\PekerjaanController::class, 'getPekerjaan']);
+    Route::get('/pekerjaan/kegiatan/{keg_id}/{tahun}', [App\Http\Controllers\PekerjaanController::class, 'getPekerjaan']);
     Route::get('/pekerjaan/kegiatan/rincian/{keg_id}/{tahun}', [App\Http\Controllers\PekerjaanController::class, 'getPaket']);
 
 
