@@ -8,9 +8,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/date-picker.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
         integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/map_search.css') }}">
+
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+
     <style>
         #mapid {
             height: 350px;
@@ -156,26 +159,44 @@
     <script src="{{ asset('assets/js/counter/jquery.waypoints.min.js')}}"></script>
     <script src="{{ asset('assets/js/counter/jquery.counterup.min.js')}}"></script>
     <script src="{{ asset('assets/js/counter/counter-custom.js')}}"></script>
+    <script src="{{ asset('js/map_search.js')}}"></script>
+
     <script>
         var map = L.map('mapid').setView([-6.822791260399927, 107.13596866437477], 12);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        @foreach ($foto as $data)
-            var informasi = `
-
-        @foreach ($data->pekerjaan as $item)
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="/pekerjaan/{{$item->id}}">{{$item->nama_pekerjaan}}</a>
-            </div>
-        </div>
-        @endforeach
-    `
-            L.marker([{{ $data->lat }}, {{ $data->long }}])
-                .addTo(map)
-                .bindPopup(informasi);
-        @endforeach
+        var data = [
+            @foreach ($foto as $data)
+            @foreach($data->pekerjaan as $item)
+            {"loc":[{{ $data->lat }}, {{ $data->long }}], "title":"{{$item->nama_pekerjaan}}", "url":"<a href=/pekerjaan/{{$item->id}}>{{$item->nama_pekerjaan}}</a>"},
+            @endforeach
+            @endforeach
+        ];
+        var markersLayer = new L.LayerGroup();	//layer contain searched elements
+        map.addLayer(markersLayer);
+        console.log(data);
+        var controlSearch = new L.Control.Search({
+            position:'topleft',
+            layer: markersLayer,
+            initial: false,
+            zoom: 17,
+            markerLocation: true
+        })
+        map.addControl( controlSearch );
+        ////////////populate map with markers from sample data
+        for(i in data) {
+            var title = data[i].title,	//value searched
+                url = data[i].url,
+                loc = data[i].loc,		//position found
+                m = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+            m.bindPopup(url);
+            markersLayer.addLayer(m);
+        }
+        // SIMPLE SEARCH LOCATION
+        $('#textsearch').on('keyup', function(e) {
+        controlSearch.searchText( e.target.value );
+        });
     </script>
 @endsection
