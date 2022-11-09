@@ -30,10 +30,10 @@ class PekerjaanController extends Controller
     }
 
     //custom
-    public function getPekerjaan($keg_id)
+    public function getPekerjaan($keg_id, $tahun)
     {
         $data = Pekerjaan::with('detail', 'output')->latest()->get()
-        ->where('program_id', $keg_id)->where('detail', null)->whereNotNull('output');
+        ->where('program_id', $keg_id)->where('detail', null)->where('tahun_anggaran', $tahun)->whereNotNull('output');
         // ->pluck('nama_pekerjaan', 'id');
         return response()->json($data);
     }
