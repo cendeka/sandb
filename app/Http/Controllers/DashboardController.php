@@ -78,7 +78,7 @@ class DashboardController extends Controller
     foreach($output as $line) {
         if(strpos($line, 'commit') === 0) {
             if(!empty($commit)) {
-                array_push($history, $commit);   
+                array_push($history, $commit);
                 unset($commit);
             }
             $commit['hash']   = substr($line, strlen('commit'));
