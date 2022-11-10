@@ -205,11 +205,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="text" id="lat" name="lat" class="form-control"
-                                    placeholder="Latitude">
+                                    placeholder="Latitude" value="">
                             </div>
                             <div class="col-lg-6">
                                 <input type="text" id="long" name="long" class="form-control"
-                                    placeholder="Longtitude">
+                                    placeholder="Longitude" value="">
                             </div>
                         </div>
                         <br>

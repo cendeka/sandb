@@ -2,16 +2,16 @@ $("#clickMe").click(function () {
     function onAccuratePositionError(e) {
       addStatus(e.message, 'error');
     }
-  
+
     function onAccuratePositionProgress(e) {
       // var message = 'Mencari… (Akurasi: ' + e.accuracy + ')';
       // addStatus(message, 'progressing');
     }
-  
+
     function onAccuratePositionFound(e) {
       // var message = 'Posisi ditemukan (Akurasi: ' + e.accuracy + ')';
       var message = 'Posisi ditemukan';
-  
+
       addStatus(message, 'done');
       map.setView(e.latlng, 18);
       L.marker(e.latlng)
@@ -19,9 +19,9 @@ $("#clickMe").click(function () {
         .bindPopup("Latitude : " + e.latlng.lat + " <br /> Longitude :" + e.latlng.lng);
       document.getElementById("lat").value = e.latlng.lat;
       document.getElementById("long").value = e.latlng.lng;
-  
+
     }
-  
+
     function addStatus(message, className) {
       var ul = document.getElementById('status'),
         li = document.createElement('li');
@@ -29,16 +29,16 @@ $("#clickMe").click(function () {
       ul.className = className;
       ul.appendChild(li);
     }
-  
+
     map.on('accuratepositionprogress', onAccuratePositionProgress);
     map.on('accuratepositionfound', onAccuratePositionFound);
     map.on('accuratepositionerror', onAccuratePositionError);
-  
+
     map.findAccuratePosition({
       maxWait: 10000,
       desiredAccuracy: 20
     });
-  
+
   });
   var peta1 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -46,19 +46,19 @@ $("#clickMe").click(function () {
       'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     id: 'mapbox/streets-v11'
   });
-  
+
   var peta2 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
       'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     id: 'mapbox/satellite-v9'
   });
-  
-  
+
+
   var peta3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
-  
+
   var peta4 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -85,6 +85,13 @@ $("#clickMe").click(function () {
   $('#modal-foto').on('shown.bs.modal', function() {
     map.invalidateSize();
   });
+  $('#lat, #long').on('keyup', function() {
+    var lat = document.getElementById("lat").value;
+    var long = document.getElementById("long").value;
+    map.setView([lat,long], 18);
+    L.marker([lat,long])
+    .addTo(map)
+  });
   var popup = L.popup();
   function onMapClick(e) {
     popup
@@ -93,7 +100,7 @@ $("#clickMe").click(function () {
       .openOn(map);
     document.getElementById("lat").value = e.latlng.lat;
     document.getElementById("long").value = e.latlng.lng;
-  
+
   }
   map.on('click', onMapClick);
   var baseMaps = {
@@ -103,6 +110,3 @@ $("#clickMe").click(function () {
     "Dark": peta4,
   };
   L.control.layers(baseMaps).addTo(map);
-  
-  
-  
