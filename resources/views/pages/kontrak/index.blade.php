@@ -208,8 +208,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                    <button class="btn btn-primary" type="submit">Simpan</button>
                     </form>
                 </div>
             </div>
@@ -375,8 +375,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Save changes</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                    <button class="btn btn-primary" type="submit">Simapn</button>
                     </form>
                 </div>
             </div>
@@ -573,7 +573,7 @@
             // original length
             var original_len = input_val.length;
 
-            // initial caret position 
+            // initial caret position
             var caret_pos = input.prop("selectionStart");
 
             // check for decimal

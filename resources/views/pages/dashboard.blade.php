@@ -69,11 +69,11 @@
            <div class="card o-hidden">
               <div class="bg-primary b-r-4 card-body">
                  <div class="media static-top-widget">
-                    <div class="align-self-center text-center"><i data-feather="message-circle"></i></div>
+                    <div class="align-self-center text-center"><i data-feather="home"></i></div>
                     <div class="media-body">
                        <span class="m-0">Rumah</span>
                        <h4 class="mb-0 counter">{{$penerima_manfaat/5}}</h4>
-                       <i class="icon-bg" data-feather="message-circle"></i>
+                       <i class="icon-bg" data-feather="home"></i>
                     </div>
                  </div>
               </div>
