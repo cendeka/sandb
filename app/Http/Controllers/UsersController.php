@@ -26,12 +26,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // $userId = Auth::id();
-        $users = User::latest()->with('tfl.pekerjaan')->paginate(10);
-        $pekerjaan = Pekerjaan::with('tfl')->get()->where('program_id', 1);
-        $title = 'Daftar Pengguna';
 
-        return view('acl.users.index', compact('users', 'title', 'pekerjaan'));
     }
 
     /**
@@ -41,7 +36,6 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('acl.users.create');
     }
 
     /**
@@ -53,41 +47,12 @@ class UsersController extends Controller
      */
     public function store(User $user, StoreUserRequest $request)
     {
-        //For demo purposes only. When creating user or inviting a user
-        // you should create a generated random password and email it to the user
-        $user->create(array_merge($request->validated(), [
-            'password' => 'password',
-        ]));
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User created successfully.'));
     }
 
     public function lokasi(Request $request)
     {
-        $rules = [
-            'user_id' => 'required',
-            'pekerjaan_id' => 'required|unique:db_tfl,pekerjaan_id',
-        ];
-        $customMessages = [
-            'required' => ':attribute tidak boleh kosong ',
-            'unique' => ':attribute sudah digunakan',
-        ];
-        $attributeNames = [
-            'user_id' => 'Pengguna',
-            'pekerjaan_id' => 'Pekerjaan',
-        ];
-        $lokasi = $request->pekerjaan_id;
 
-        foreach ($lokasi as $l) {
-            $pekerjaan = Tfl::firstOrCreate([
-                'user_id' => $request->user_id,
-                'pekerjaan_id' => $l,
-            ]);
-        }
-        Alert::success('Lokasi', 'Data Lokasi TFL Berhasil Ditambahkan');
-
-        return redirect('users');
     }
 
     /**
@@ -98,9 +63,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('acl.users.show', [
-            'user' => $user,
-        ]);
+
     }
 
     /**
@@ -111,11 +74,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('acl.users.edit', [
-            'user' => $user,
-            'userRole' => $user->roles->pluck('name')->toArray(),
-            'roles' => Role::latest()->get(),
-        ]);
+
     }
 
     /**
@@ -127,12 +86,7 @@ class UsersController extends Controller
      */
     public function update(User $user, UpdateUserRequest $request)
     {
-        $user->update($request->validated());
 
-        $user->syncRoles($request->get('role'));
-
-        return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
     }
 
     /**
@@ -143,9 +97,6 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User deleted successfully.'));
     }
 }
