@@ -59,7 +59,7 @@ class UsersController extends Controller
         ]);
 
         $input = $request->all();
-        $input['password'] = bcrypt(Str::random(8));
+        $input['password'] = bcrypt('admin123');
         $input['remember_token'] = Str::random(32);
         $input['deleted_at'] = null;
 
