@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'role:admin']], function () {
     Route::resource('roles', RolesController::class);
     Route::resource('permissions', PermissionsController::class);
-    Route::resource('users', UsersController::class);
 
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('/');
 
@@ -98,7 +97,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'r
     // Route::get('/pekerjaan/{pekerjaan_id}', [PekerjaanController::class, 'pekerjaan.detail']);
     // Single
     Route::get('fetch-git-commits', [App\Http\Controllers\DashboardController::class, 'commits']);
-    Route::post('/tfl/lokasi/', [App\Http\Controllers\UsersController::class, 'lokasi'])->name('tfl.lokasi');
 
     Route::get('/cover/kontrak/', [App\Http\Controllers\KontrakController::class, 'cover']);
     Route::get('/edit/kontrak/', [App\Http\Controllers\KontrakController::class, 'edit_kontrak']);
