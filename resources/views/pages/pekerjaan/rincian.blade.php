@@ -109,6 +109,7 @@
                                     <option value="" selected>Pilih Tahun Anggaran</option>
                                     <option value="2022">2022</option>
                                     <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -163,13 +164,28 @@
                                     <table class="table" id="divOutput">
                                         <tr>
                                             <input type="hidden" name="output[0][id]" class="form-control"
-                                                    placeholder="Komponen">
-                                            <td><input type="text" name="output[0][komponen]" class="form-control"
-                                                    placeholder="Komponen"></td>
+                                                placeholder="Komponen">
+                                            <td>
+                                                <select name="output[0][komponen]" class="form-control" id="">
+                                                    <option value="MCK">MCK</option>
+                                                    <option value="Tangki Septik">Tangki Septik Individual</option>
+                                                    <option value="Tangki Septik Komunal">Tangki Septik Komunal</option>
+                                                </select>
+                                            </td>
+                                            {{-- <td><input type="text" name="output[0][komponen]" class="form-control"
+                                                    placeholder="Komponen"></td> --}}
                                             <td><input type="number" name="output[0][volume]" class="form-control"
-                                                    placeholder="Volume"></td>
-                                            <td><input type="text" name="output[0][satuan]" class="form-control"
-                                                    placeholder="Satuan"></td>
+                                                    placeholder="Volume">
+                                            </td>
+                                            <td>
+                                                <select name="output[0][satuan]" class="form-control" id="">
+                                                    <option value="Unit">Unit</option>
+                                                    <option value="m">m</option>
+                                                    <option value="m2">m2</option>
+                                                </select>
+                                            </td>
+                                            {{-- <td><input type="text" name="output[0][satuan]" class="form-control"
+                                                    placeholder="Satuan"></td> --}}
                                             <td><button type="button" name="add" id="tambah-output"
                                                     class="btn btn-outline-primary">Tambah</button></td>
                                         </tr>
@@ -285,20 +301,21 @@
                                         <table class="table" id="komponen">
                                             @foreach ($d->output as $key => $output)
                                                 <tr>
-                                                        <input type="hidden" name="output[{{ $key }}][id]"
-                                                            value="{{ $output->id }}">
+                                                    <input type="hidden" name="output[{{ $key }}][id]"
+                                                        value="{{ $output->id }}">
                                                     <td><input type="text"
                                                             name="output[{{ $key }}][komponen]"
                                                             class="form-control" placeholder="Komponen"
-                                                            value="{{ $output->komponen }}"></td>
+                                                            value="{{ $output->komponen }}" disabled></td>
                                                     <td><input type="number" name="output[{{ $key }}][volume]"
                                                             class="form-control" placeholder="Volume"
                                                             value="{{ $output->volume }}"></td>
                                                     <td><input type="text" name="output[{{ $key }}][satuan]"
                                                             class="form-control" placeholder="Satuan"
-                                                            value="{{ $output->satuan }}"></td>
+                                                            value="{{ $output->satuan }}" disabled></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-outline-danger remove-output-field"
+                                                        <button type="button"
+                                                            class="btn btn-outline-danger remove-output-field"
                                                             href="javascript:void(0)"
                                                             onclick="hapus({{ $output->id }})">Hapus</button>
                                                         {{-- <button type="button" name="add" class="btn btn-outline-danger remove-output-field">Hapus</button> --}}
@@ -453,14 +470,25 @@
         var i = 0;
         $("#tambah-output, #update-output").click(function() {
             ++i;
+
             var a = '<tr>' +
                 '<input type="hidden" name="output[' + i + '][id]" class="form-control">' +
-                ' <td><input type="text" name="output[' + i + '][komponen]" class="form-control"' +
-                'placeholder="Komponen"></td>' +
+                '<td>' +
+                '<select name="output[' + i + '][komponen]" class="form-control" id="">' +
+                '<option value="MCK">MCK</option>' +
+                '<option value="Tangki Septik">Tangki Septik Individual</option>' +
+                '<option value="Tangki Septik Komunal">Tangki Septik Komunal</option>' +
+                '</select>' +
+                '</td>' +
                 '<td><input type="number" name="output[' + i + '][volume]" class="form-control"' +
                 'placeholder="Volume"></td>' +
-                '<td><input type="text" name="output[' + i + '][satuan]" class="form-control"' +
-                'placeholder="Satuan"></td>' +
+                '<td>' +
+                '<select name="output[' + i + '][satuan]" class="form-control" id="">' +
+                '<option value="Unit">Unit</option>' +
+                '<option value="m">m</option>' +
+                '<option value="m2">m2</option>' +
+                '</select>' +
+                '</td>' +
                 '<td><button type="button" name="add"' +
                 'class="btn btn-outline-danger remove-output-field">Hapus</button></td>' +
                 '</tr>'
@@ -471,7 +499,7 @@
         });
     </script>
     <script>
-            function hapus(id) {
+        function hapus(id) {
             var url = '{{ route('output.destroy') }}';
             var id = id;
             Swal.fire({
